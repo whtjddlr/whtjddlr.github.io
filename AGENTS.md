@@ -91,6 +91,32 @@ PM 지향이므로 기획 역량이 드러나는 순서입니다.
 - 이모지를 섹션 마커로 쓰지 않음.
 - 인쇄 스타일(`@media print`)이 있음 — 마크업 변경 시 인쇄 결과도 확인.
 
+### 모션·인터랙션 시스템
+
+`index.html` 하단의 단일 `<script>`가 전부 담당합니다. 의존성 0, 바닐라 JS.
+
+| 구성요소 | 구현 | 비고 |
+|---|---|---|
+| 히어로 인트로 | CSS 애니메이션 (eyebrow→이름→인용구→사진 순 스태거) | 페이지 로드 시 1회 |
+| 스크롤 리빌 | IntersectionObserver가 `.rv` 부여 → 교차 시 `.in` 추가 | 대상: `.section-head, .entry, .award-card, .skill-group, .post, .shot, .footer` |
+| 스택 스태거 | `.shots`, `.skills` 자식에 `--d`(index×0.09s) 지연 부여 | "쌓이는 느낌"의 핵심 |
+| 점수 카운트업 | 수상 카드 리빌 시 0→0.97635 (1.3s, ease-out) | `tabular-nums`라 레이아웃 흔들림 없음 |
+| 스크롤 진행바 | `.progress` (상단 2px 그린 바, scaleX) | JS가 body에 동적 생성 |
+| 스크롤스파이 | 현재 섹션의 topbar 링크에 `.active` (그린) | rootMargin 밴드 방식 |
+| 커서 링 | 마우스를 lerp로 따라오는 그린 링, 링크 위에서 1.55배 확대 | `pointer: fine` + 모션 허용 시에만 생성. 기본 커서(손가락 포함)는 유지 |
+| 사진 패럴랙스 | 스크롤 시 히어로 사진 translateY(scrollY×0.08) | `.hero-photo` 인트로는 `backwards` fill — `both`로 바꾸면 패럴랙스가 죽으니 주의 |
+| 호버 마이크로 | 스크린샷 리프트+그림자, 태그 그린 틴트, 링크 색 전환 | CSS transition만 사용 |
+
+**모션 규칙 (위반 금지):**
+
+- 모든 모션은 `prefers-reduced-motion: reduce`에서 완전히 꺼져야 함
+  (CSS는 media query로, JS는 `reduce` 변수 게이트로 이미 처리됨 — 새 모션도 동일하게).
+- JS 실패/미로드 시에도 콘텐츠가 전부 보여야 함 (`.rv`는 JS가 부여하므로 no-JS는 자동 안전).
+- `@media print`에서 `.rv`를 강제 표시하는 규칙이 있음 — 삭제하면 인쇄 시 빈 페이지가 나옴.
+- 새 리빌 대상은 기존 IntersectionObserver에 추가 (관찰자 새로 만들지 말 것).
+- 스크롤 리스너는 `passive: true` + rAF 스로틀 유지.
+- 모션 지속시간 0.9s 이하, 과한 이징·회전·블러 금지. 은은하게.
+
 ## 6. 이미지 파이프라인
 
 스크린샷 원본은 각 프로젝트 저장소에 있습니다. 갱신 시:
