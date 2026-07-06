@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚢</text></svg>">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-  body, h1, h2, h3, p, ul, figure { margin: 0; }
+  body, h1, h2, h3, p, ul, figure, blockquote { margin: 0; }
 </style>
 </head>
 <body>
@@ -43,6 +43,20 @@
     line-height: 1.7;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(720px 480px at 82% -4%, rgba(14, 123, 74, 0.07), transparent 70%),
+      radial-gradient(620px 480px at -6% 24%, rgba(154, 106, 0, 0.05), transparent 70%);
+    background-repeat: no-repeat;
+  }
+  /* film grain */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0.045'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
   }
   ::selection { background: #D8EBDC; }
 
@@ -140,27 +154,54 @@
   .link-out:hover, .link-out:focus-visible { border-bottom-color: var(--signal); }
   a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
 
-  /* ---------- hero ---------- */
+  /* ---------- hero (cover) ---------- */
+  .hero {
+    min-height: calc(100vh - 52px);
+    min-height: calc(100svh - 52px);
+    display: flex;
+    flex-direction: column;
+  }
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 208px;
-    gap: 48px;
-    align-items: start;
-  }
-  .hero-photo { grid-column: 2; grid-row: 1; padding-top: 42px; }
-  .hero-photo img {
-    width: 100%;
-    display: block;
-    border-radius: 12px;
-    border: 1px solid var(--line-strong);
+    grid-template-columns: minmax(0, 1fr) 264px;
+    gap: 64px;
+    align-items: center;
+    flex: 1;
+    padding: 44px 0 40px;
   }
   .hero-main { grid-column: 1; grid-row: 1; }
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-grid { animation: rise 0.6s ease-out both; }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
-    }
+  .hero-photo {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    margin: 0;
+  }
+  .hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 34px 0;
+    border-radius: 132px 132px 20px 20px;
+    background: linear-gradient(160deg, rgba(14, 123, 74, 0.18), rgba(154, 106, 0, 0.12));
+    transform: translate(16px, 14px);
+    z-index: -1;
+  }
+  .photo-frame {
+    border-radius: 132px 132px 20px 20px;
+    overflow: hidden;
+    box-shadow: 0 28px 48px -30px rgba(27, 35, 31, 0.4);
+  }
+  .photo-frame img {
+    width: 100%;
+    display: block;
+    filter: saturate(0.92) contrast(0.97) brightness(1.01);
+  }
+  .hero-photo figcaption {
+    margin-top: 14px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    color: var(--ink-faint);
   }
   .hero .eyebrow { display: block; margin-bottom: 28px; }
   .hero h1 {
@@ -171,30 +212,73 @@
   }
   .hero .role {
     margin-top: 10px;
-    font-size: clamp(19px, 3vw, 24px);
+    font-size: clamp(18px, 3vw, 22px);
     font-weight: 600;
     color: var(--ink-soft);
     letter-spacing: -0.015em;
   }
-  .hero .thesis {
-    margin-top: 40px;
-    max-width: 36em;
-    font-size: 17.5px;
-    line-height: 1.85;
+  .pull {
+    margin: 44px 0 0;
+    font-size: clamp(21px, 3.4vw, 26px);
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    max-width: 21em;
     text-wrap: balance;
   }
-  .hero .thesis strong { font-weight: 700; }
-  .hero .thesis .q { color: var(--ink-soft); }
+  .pull::before {
+    content: "\201C";
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 58px;
+    line-height: 0.55;
+    color: var(--signal);
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+  .hl {
+    background: linear-gradient(transparent 62%, rgba(23, 163, 95, 0.24) 62%);
+    padding: 0 2px;
+  }
+  .thesis-sub {
+    margin-top: 24px;
+    max-width: 34em;
+    font-size: 15.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+  .thesis-sub strong { color: var(--ink); font-weight: 700; }
   .hero-links {
-    margin-top: 36px;
+    margin-top: 32px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px 28px;
   }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero .eyebrow, .hero h1, .hero .role, .hero .pull,
+    .hero .thesis-sub, .hero .hero-links, .hero .stats {
+      animation: rise 0.65s ease-out both;
+    }
+    .hero h1 { animation-delay: 0.06s; }
+    .hero .role { animation-delay: 0.12s; }
+    .hero .pull { animation-delay: 0.2s; }
+    .hero .thesis-sub { animation-delay: 0.28s; }
+    .hero .hero-links { animation-delay: 0.34s; }
+    .hero .stats { animation-delay: 0.42s; }
+    .hero-photo { animation: photo-in 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both 0.18s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes photo-in {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+      to { opacity: 1; transform: none; }
+    }
+  }
 
   /* ---------- stat strip ---------- */
   .stats {
-    margin-top: 64px;
+    margin-top: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid var(--line-strong);
@@ -506,10 +590,18 @@
     .page { padding-top: 44px; }
     .topbar-in { padding: 0 16px; }
     .topbar-links { gap: 14px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-    .hero-photo { grid-column: 1; grid-row: 1; padding-top: 0; width: 128px; }
-    .hero-photo img { border-radius: 10px; }
+    .hero { min-height: 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; padding: 36px 0 12px; }
+    .hero-photo { grid-column: 1; grid-row: 1; justify-self: center; width: 178px; }
+    .hero-photo::before {
+      border-radius: 90px 90px 14px 14px;
+      transform: translate(12px, 10px);
+    }
+    .photo-frame { border-radius: 90px 90px 14px 14px; }
     .hero-main { grid-column: 1; grid-row: 2; }
+    .hero .eyebrow { margin-bottom: 20px; }
+    .pull { margin-top: 32px; }
+    .stats { margin-top: 48px; }
     .stats { grid-template-columns: 1fr; border-top: none; }
     .stat { border-right: none; border-top: 1px solid var(--line); padding: 16px 0 12px; }
     .award-card { padding: 28px 22px 26px; }
@@ -544,15 +636,15 @@
   <!-- ===================== HERO ===================== -->
   <header class="hero">
     <div class="hero-grid">
-      <figure class="hero-photo" aria-hidden="false">
-        <img src="shots/profile.jpg" alt="조성익 프로필 사진">
-      </figure>
       <div class="hero-main">
         <span class="eyebrow">Portfolio · Cho Sungik · github.com/whtjddlr</span>
         <h1>조성익</h1>
         <p class="role">직접 만들 수 있는 기획자를 지향합니다</p>
-        <p class="thesis">
-          <span class="q">“잘하는 사람은 많으니, 저는 꾸준히 끝까지 만들어보려 합니다.”</span><br>
+        <blockquote class="pull">
+          잘하는 사람은 많으니,<br>
+          저는 꾸준히 <span class="hl">끝까지</span> 만들어보려 합니다.
+        </blockquote>
+        <p class="thesis-sub">
           목표는 <strong>서비스 기획·PM</strong>입니다. 문제를 정의하고 우선순위를 정하는 것에서
           멈추지 않고, 그 기획을 <strong>직접 개발해 배포하고 사용자 앞에서 검증</strong>합니다.
           2026년 한 해 동안 기획 → 개발 → 배포를 5번 완주했고,
@@ -564,6 +656,12 @@
           <a class="link-out" href="mailto:choim2008@naver.com">choim2008@naver.com</a>
         </nav>
       </div>
+      <figure class="hero-photo">
+        <div class="photo-frame">
+          <img src="shots/profile.jpg" alt="조성익 프로필 사진">
+        </div>
+        <figcaption>CHO SUNGIK</figcaption>
+      </figure>
     </div>
 
     <div class="stats" role="list">
