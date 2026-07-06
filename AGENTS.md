@@ -166,6 +166,13 @@ git add -A && git commit -m "변경 내용" && git push
 curl -s -o /dev/null -w "%{http_code}" https://whtjddlr.github.io/   # 200 확인
 ```
 
+**빌드가 3분 넘게 안 끝나면** (실제로 종종 발생): 수동 재빌드를 요청하면 바로 풀립니다.
+
+```bash
+gh api -X POST repos/whtjddlr/whtjddlr.github.io/pages/builds
+gh api repos/whtjddlr/whtjddlr.github.io/pages/builds --jq '.[0].status'  # built 확인
+```
+
 ### 변경 체크리스트
 
 - [ ] PM 서사 우선순위(문제→결정→검증→구현)를 지켰는가
