@@ -91,9 +91,24 @@
     font-size: 12px;
     letter-spacing: 0.06em;
     color: var(--ink-soft);
-    padding: 4px 0;
+    padding: 4px 1px;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  .topbar-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1.5px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
   }
   .topbar-links a:hover, .topbar-links a:focus-visible { color: var(--signal); }
+  .topbar-links a:hover::after,
+  .topbar-links a:focus-visible::after,
+  .topbar-links a.active::after { transform: scaleX(1); }
   .section, .footer { scroll-margin-top: 72px; }
 
   .page {
@@ -148,10 +163,20 @@
     font-family: var(--mono);
     font-size: 12.5px;
     color: var(--signal);
-    border-bottom: 1px solid transparent;
-    padding-bottom: 1px;
+    padding-bottom: 2px;
+    position: relative;
   }
-  .link-out:hover, .link-out:focus-visible { border-bottom-color: var(--signal); }
+  .link-out::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .link-out:hover::after, .link-out:focus-visible::after { transform: scaleX(1); }
   a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
 
   /* ---------- hero (cover) ---------- */
@@ -617,38 +642,36 @@
     pointer-events: none;
   }
 
-  /* ---------- cursor dot (fine pointer only) ---------- */
-  .cursor-dot { display: none; }
+  /* ---------- cursor glow (fine pointer only) ---------- */
+  .cursor-glow { display: none; }
   @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .cursor-dot {
+    .cursor-glow {
+      display: block;
       position: fixed;
-      top: -18px; left: -18px;
-      width: 36px; height: 36px;
+      top: -80px; left: -80px;
+      width: 160px; height: 160px;
       border-radius: 50%;
-      background: #fff;
-      color: var(--ink);
-      mix-blend-mode: difference;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--mono);
-      font-size: 14px;
+      background: radial-gradient(circle,
+        rgba(23, 163, 95, 0.11) 0%,
+        rgba(23, 163, 95, 0.05) 42%,
+        rgba(23, 163, 95, 0) 70%);
       pointer-events: none;
-      z-index: 90;
+      z-index: 15;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.45s ease;
     }
-    .cursor-dot .g {
-      opacity: 0;
-      transition: opacity 0.18s ease 0.06s;
+    .cursor-glow.on { opacity: 1; }
+    .cursor-glow.hot {
+      background: radial-gradient(circle,
+        rgba(23, 163, 95, 0.16) 0%,
+        rgba(23, 163, 95, 0.07) 45%,
+        rgba(23, 163, 95, 0) 70%);
     }
-    .cursor-dot.on { opacity: 1; }
-    .cursor-dot.hot .g { opacity: 1; }
   }
 
   /* ---------- print ---------- */
   @media print {
-    .topbar, .progress, .cursor-dot { display: none; }
+    .topbar, .progress, .cursor-glow { display: none; }
     .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
     .live-dot { animation: none; }
     .link-out { color: var(--ink); }
@@ -1135,34 +1158,33 @@
     });
   }
 
-  /* ---------- cursor dot (desktop, motion allowed) ---------- */
+  /* ---------- cursor glow (desktop, motion allowed) ---------- */
   if (window.matchMedia('(pointer: fine)').matches && !reduce) {
-    var dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    dot.setAttribute('aria-hidden', 'true');
-    dot.innerHTML = '<span class="g">↗</span>';
-    document.body.appendChild(dot);
-    var DOT = 0.18, HOT = 1;
-    var mx = 0, my = 0, x = 0, y = 0, s = DOT, ts = DOT, running = false;
+    var glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(glow);
+    var IDLE = 1, FOCUS = 0.55;
+    var mx = 0, my = 0, x = 0, y = 0, s = IDLE, ts = IDLE, running = false;
     function loop() {
-      x += (mx - x) * 0.22;
-      y += (my - y) * 0.22;
-      s += (ts - s) * 0.18;
-      dot.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
+      x += (mx - x) * 0.15;
+      y += (my - y) * 0.15;
+      s += (ts - s) * 0.16;
+      glow.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
       requestAnimationFrame(loop);
     }
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY;
-      dot.classList.add('on');
+      glow.classList.add('on');
       if (!running) { running = true; x = mx; y = my; loop(); }
     }, { passive: true });
     document.addEventListener('mouseover', function (e) {
       var hot = e.target.closest && e.target.closest('a, button');
-      ts = hot ? HOT : DOT;
-      dot.classList.toggle('hot', !!hot);
+      ts = hot ? FOCUS : IDLE;
+      glow.classList.toggle('hot', !!hot);
     }, true);
     document.documentElement.addEventListener('mouseleave', function () {
-      dot.classList.remove('on');
+      glow.classList.remove('on');
     });
   }
 })();
