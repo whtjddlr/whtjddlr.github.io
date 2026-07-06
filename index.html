@@ -617,31 +617,38 @@
     pointer-events: none;
   }
 
-  /* ---------- cursor ring (fine pointer only) ---------- */
-  .cursor-ring { display: none; }
+  /* ---------- cursor dot (fine pointer only) ---------- */
+  .cursor-dot { display: none; }
   @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .cursor-ring {
-      display: block;
+    .cursor-dot {
       position: fixed;
-      top: -16px; left: -16px;
-      width: 32px; height: 32px;
-      border: 1.5px solid rgba(14, 123, 74, 0.45);
+      top: -18px; left: -18px;
+      width: 36px; height: 36px;
       border-radius: 50%;
+      background: #fff;
+      color: var(--ink);
+      mix-blend-mode: difference;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 14px;
       pointer-events: none;
       z-index: 90;
       opacity: 0;
-      transition: opacity 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+      transition: opacity 0.3s ease;
     }
-    .cursor-ring.on { opacity: 1; }
-    .cursor-ring.hot {
-      background: rgba(23, 163, 95, 0.08);
-      border-color: rgba(14, 123, 74, 0.75);
+    .cursor-dot .g {
+      opacity: 0;
+      transition: opacity 0.18s ease 0.06s;
     }
+    .cursor-dot.on { opacity: 1; }
+    .cursor-dot.hot .g { opacity: 1; }
   }
 
   /* ---------- print ---------- */
   @media print {
-    .topbar, .progress, .cursor-ring { display: none; }
+    .topbar, .progress, .cursor-dot { display: none; }
     .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
     .live-dot { animation: none; }
     .link-out { color: var(--ink); }
@@ -1128,32 +1135,34 @@
     });
   }
 
-  /* ---------- cursor ring (desktop, motion allowed) ---------- */
+  /* ---------- cursor dot (desktop, motion allowed) ---------- */
   if (window.matchMedia('(pointer: fine)').matches && !reduce) {
-    var ring = document.createElement('div');
-    ring.className = 'cursor-ring';
-    ring.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(ring);
-    var mx = 0, my = 0, x = 0, y = 0, s = 1, ts = 1, running = false;
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dot.innerHTML = '<span class="g">↗</span>';
+    document.body.appendChild(dot);
+    var DOT = 0.18, HOT = 1;
+    var mx = 0, my = 0, x = 0, y = 0, s = DOT, ts = DOT, running = false;
     function loop() {
-      x += (mx - x) * 0.16;
-      y += (my - y) * 0.16;
-      s += (ts - s) * 0.2;
-      ring.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
+      x += (mx - x) * 0.22;
+      y += (my - y) * 0.22;
+      s += (ts - s) * 0.18;
+      dot.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
       requestAnimationFrame(loop);
     }
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY;
-      ring.classList.add('on');
+      dot.classList.add('on');
       if (!running) { running = true; x = mx; y = my; loop(); }
     }, { passive: true });
     document.addEventListener('mouseover', function (e) {
       var hot = e.target.closest && e.target.closest('a, button');
-      ts = hot ? 1.55 : 1;
-      ring.classList.toggle('hot', !!hot);
+      ts = hot ? HOT : DOT;
+      dot.classList.toggle('hot', !!hot);
     }, true);
     document.documentElement.addEventListener('mouseleave', function () {
-      ring.classList.remove('on');
+      dot.classList.remove('on');
     });
   }
 })();

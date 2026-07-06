@@ -103,7 +103,7 @@ PM 지향이므로 기획 역량이 드러나는 순서입니다.
 | 점수 카운트업 | 수상 카드 리빌 시 0→0.97635 (1.3s, ease-out) | `tabular-nums`라 레이아웃 흔들림 없음 |
 | 스크롤 진행바 | `.progress` (상단 2px 그린 바, scaleX) | JS가 body에 동적 생성 |
 | 스크롤스파이 | 현재 섹션의 topbar 링크에 `.active` (그린) | rootMargin 밴드 방식 |
-| 커서 링 | 마우스를 lerp로 따라오는 그린 링, 링크 위에서 1.55배 확대 | `pointer: fine` + 모션 허용 시에만 생성. 기본 커서(손가락 포함)는 유지 |
+| 커서 도트 | 마우스를 lerp로 따라오는 작은 도트 → 링크 위에서 36px 원 + "↗" 글리프로 확대. `mix-blend-mode: difference`로 배경 자동 반전(밝은 곳에선 어둡게, 사진 위에선 밝게) | `pointer: fine` + 모션 허용 시에만 생성. 기본 커서(손가락 포함)는 유지 |
 | 사진 패럴랙스 | 스크롤 시 히어로 사진 translateY(scrollY×0.08) | `.hero-photo` 인트로는 `backwards` fill — `both`로 바꾸면 패럴랙스가 죽으니 주의 |
 | 호버 마이크로 | 스크린샷 리프트+그림자, 태그 그린 틴트, 링크 색 전환 | CSS transition만 사용 |
 
