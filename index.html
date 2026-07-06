@@ -33,7 +33,10 @@
     --sans: "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic", -apple-system, sans-serif;
   }
 
-  html { background: var(--paper); }
+  html { background: var(--paper); scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
   body {
     font-family: var(--sans);
     color: var(--ink);
@@ -41,6 +44,43 @@
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
   }
+  ::selection { background: #D8EBDC; }
+
+  /* ---------- top nav ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(250, 250, 248, 0.88);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-in {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .topbar .brand {
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+  .topbar-links { display: flex; gap: 20px; }
+  .topbar-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    padding: 4px 0;
+  }
+  .topbar-links a:hover, .topbar-links a:focus-visible { color: var(--signal); }
+  .section, .footer { scroll-margin-top: 72px; }
 
   .page {
     max-width: 860px;
@@ -101,6 +141,27 @@
   a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
 
   /* ---------- hero ---------- */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 208px;
+    gap: 48px;
+    align-items: start;
+  }
+  .hero-photo { grid-column: 2; grid-row: 1; padding-top: 42px; }
+  .hero-photo img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--line-strong);
+  }
+  .hero-main { grid-column: 1; grid-row: 1; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-grid { animation: rise 0.6s ease-out both; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+  }
   .hero .eyebrow { display: block; margin-bottom: 28px; }
   .hero h1 {
     font-size: clamp(52px, 9vw, 84px);
@@ -430,9 +491,25 @@
     color: var(--ink-faint);
   }
 
+  /* ---------- print ---------- */
+  @media print {
+    .topbar { display: none; }
+    .live-dot { animation: none; }
+    .link-out { color: var(--ink); }
+    .shots { overflow: visible; flex-wrap: wrap; }
+    .shot, .stat, .skill-group, .award-card { break-inside: avoid; }
+    .page { padding: 24px 0; }
+  }
+
   /* ---------- responsive ---------- */
   @media (max-width: 720px) {
-    .page { padding-top: 52px; }
+    .page { padding-top: 44px; }
+    .topbar-in { padding: 0 16px; }
+    .topbar-links { gap: 14px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero-photo { grid-column: 1; grid-row: 1; padding-top: 0; width: 128px; }
+    .hero-photo img { border-radius: 10px; }
+    .hero-main { grid-column: 1; grid-row: 2; }
     .stats { grid-template-columns: 1fr; border-top: none; }
     .stat { border-right: none; border-top: 1px solid var(--line); padding: 16px 0 12px; }
     .award-card { padding: 28px 22px 26px; }
@@ -449,25 +526,45 @@
   }
 </style>
 
-<div class="page">
+<nav class="topbar" aria-label="페이지 내 이동">
+  <div class="topbar-in">
+    <a class="brand" href="#top">조성익</a>
+    <div class="topbar-links">
+      <a href="#award">수상</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#skills">역량</a>
+      <a href="#writing">글</a>
+      <a href="#contact">연락처</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page" id="top">
 
   <!-- ===================== HERO ===================== -->
   <header class="hero">
-    <span class="eyebrow">Portfolio · Cho Sungik · github.com/whtjddlr</span>
-    <h1>조성익</h1>
-    <p class="role">직접 만들 수 있는 기획자를 지향합니다</p>
-    <p class="thesis">
-      <span class="q">“잘하는 사람은 많으니, 저는 꾸준히 끝까지 만들어보려 합니다.”</span><br>
-      목표는 <strong>서비스 기획·PM</strong>입니다. 문제를 정의하고 우선순위를 정하는 것에서
-      멈추지 않고, 그 기획을 <strong>직접 개발해 배포하고 사용자 앞에서 검증</strong>합니다.
-      2026년 한 해 동안 기획 → 개발 → 배포를 5번 완주했고,
-      전국 AI 챌린지에서는 팀장으로 팀을 이끌어 1위를 기록했습니다.
-    </p>
-    <nav class="hero-links" aria-label="외부 링크">
-      <a class="link-out" href="https://github.com/whtjddlr" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="link-out" href="https://blog.naver.com/solist-" target="_blank" rel="noopener">Blog ↗</a>
-      <a class="link-out" href="mailto:choim2008@naver.com">choim2008@naver.com</a>
-    </nav>
+    <div class="hero-grid">
+      <figure class="hero-photo" aria-hidden="false">
+        <img src="shots/profile.jpg" alt="조성익 프로필 사진">
+      </figure>
+      <div class="hero-main">
+        <span class="eyebrow">Portfolio · Cho Sungik · github.com/whtjddlr</span>
+        <h1>조성익</h1>
+        <p class="role">직접 만들 수 있는 기획자를 지향합니다</p>
+        <p class="thesis">
+          <span class="q">“잘하는 사람은 많으니, 저는 꾸준히 끝까지 만들어보려 합니다.”</span><br>
+          목표는 <strong>서비스 기획·PM</strong>입니다. 문제를 정의하고 우선순위를 정하는 것에서
+          멈추지 않고, 그 기획을 <strong>직접 개발해 배포하고 사용자 앞에서 검증</strong>합니다.
+          2026년 한 해 동안 기획 → 개발 → 배포를 5번 완주했고,
+          전국 AI 챌린지에서는 팀장으로 팀을 이끌어 1위를 기록했습니다.
+        </p>
+        <nav class="hero-links" aria-label="외부 링크">
+          <a class="link-out" href="https://github.com/whtjddlr" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="link-out" href="https://blog.naver.com/solist-" target="_blank" rel="noopener">Blog ↗</a>
+          <a class="link-out" href="mailto:choim2008@naver.com">choim2008@naver.com</a>
+        </nav>
+      </div>
+    </div>
 
     <div class="stats" role="list">
       <div class="stat" role="listitem">
@@ -486,7 +583,7 @@
   </header>
 
   <!-- ===================== AWARD ===================== -->
-  <section class="section" aria-labelledby="award-title">
+  <section class="section" id="award" aria-labelledby="award-title">
     <div class="section-head">
       <h2 id="award-title">수상 기록</h2>
       <span class="eyebrow">Award</span>
@@ -537,7 +634,7 @@
   </section>
 
   <!-- ===================== PROJECTS ===================== -->
-  <section class="section" aria-labelledby="log-title">
+  <section class="section" id="projects" aria-labelledby="log-title">
     <div class="section-head">
       <h2 id="log-title">프로젝트 — 기획부터 배포까지</h2>
       <span class="eyebrow">5 Live Services</span>
@@ -718,7 +815,7 @@
   </section>
 
   <!-- ===================== SKILLS ===================== -->
-  <section class="section" aria-labelledby="skills-title">
+  <section class="section" id="skills" aria-labelledby="skills-title">
     <div class="section-head">
       <h2 id="skills-title">할 수 있는 것</h2>
       <span class="eyebrow">Capabilities</span>
@@ -744,7 +841,7 @@
   </section>
 
   <!-- ===================== WRITING ===================== -->
-  <section class="section" aria-labelledby="writing-title">
+  <section class="section" id="writing" aria-labelledby="writing-title">
     <div class="section-head">
       <h2 id="writing-title">글</h2>
       <span class="eyebrow">SSAFYcial · Blog</span>
@@ -770,13 +867,13 @@
   </section>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="contact">
       <a class="link-out" href="mailto:choim2008@naver.com">choim2008@naver.com</a>
       <a class="link-out" href="https://github.com/whtjddlr" target="_blank" rel="noopener">github.com/whtjddlr ↗</a>
       <a class="link-out" href="https://blog.naver.com/solist-" target="_blank" rel="noopener">blog.naver.com/solist- ↗</a>
     </div>
-    <span class="fine">CHO SUNGIK · 2026</span>
+    <span class="fine">CHO SUNGIK · UPDATED 2026.07</span>
   </footer>
 
 </div>
