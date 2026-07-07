@@ -757,7 +757,7 @@
     pointer-events: none;
   }
 
-  /* ---------- ink-wash cursor (fine pointer only) ---------- */
+  /* ---------- paper cursor (fine pointer only) ---------- */
   .cursor-orb { display: none; }
   @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
     body.cursor-ready,
@@ -769,23 +769,22 @@
     .cursor-orb {
       display: block;
       position: fixed;
-      top: -21px; left: -21px;
-      width: 42px; height: 42px;
-      border-radius: 48% 52% 51% 49% / 47% 45% 55% 53%;
+      top: -20px; left: -20px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
       background:
-        radial-gradient(circle at 37% 42%, rgba(109, 190, 138, 0.3) 0 24%, rgba(109, 190, 138, 0.13) 39%, transparent 64%),
-        radial-gradient(circle at 68% 68%, rgba(202, 232, 198, 0.3) 0 26%, transparent 54%),
-        radial-gradient(circle at 52% 48%, rgba(247, 249, 226, 0.36) 0%, rgba(198, 229, 204, 0.22) 58%, rgba(14, 123, 74, 0.08) 100%);
-      border: 1px solid rgba(14, 123, 74, 0.12);
+        radial-gradient(circle at 38% 31%, rgba(255, 254, 239, 0.78) 0 20%, transparent 42%),
+        radial-gradient(circle at 68% 72%, rgba(192, 224, 203, 0.28) 0 29%, transparent 58%),
+        linear-gradient(145deg, rgba(250, 244, 220, 0.58), rgba(221, 237, 219, 0.42));
+      border: 1px solid rgba(14, 123, 74, 0.13);
       box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.34),
-        inset 0 -8px 14px rgba(14, 123, 74, 0.035),
-        0 3px 9px rgba(27, 35, 31, 0.045);
+        inset 0 0 0 1px rgba(255, 255, 255, 0.38),
+        0 3px 10px rgba(27, 35, 31, 0.04);
       overflow: hidden;
       pointer-events: none;
       z-index: 70;
       opacity: 0;
-      filter: blur(0.15px);
+      filter: saturate(0.96);
       transition: opacity 0.24s ease, background 0.24s ease, border-color 0.24s ease;
       will-change: transform;
     }
@@ -796,28 +795,31 @@
       pointer-events: none;
     }
     .cursor-orb::before {
-      inset: 6px 7px 8px 5px;
-      border-radius: 54% 46% 45% 55% / 48% 57% 43% 52%;
+      inset: 0;
+      border-radius: inherit;
       background:
-        radial-gradient(circle at 35% 45%, rgba(14, 123, 74, 0.18) 0 30%, transparent 62%),
-        radial-gradient(circle at 72% 34%, rgba(154, 106, 0, 0.06) 0 28%, transparent 56%);
-      filter: blur(1.3px);
-      opacity: 0.62;
+        radial-gradient(circle at 26% 34%, rgba(14, 123, 74, 0.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 66% 26%, rgba(154, 106, 0, 0.055) 0 1px, transparent 2px),
+        radial-gradient(circle at 72% 74%, rgba(14, 123, 74, 0.06) 0 1px, transparent 2px),
+        radial-gradient(circle at 42% 68%, rgba(27, 35, 31, 0.045) 0 1px, transparent 2px);
+      background-size: 17px 17px, 19px 19px, 13px 13px, 23px 23px;
+      mix-blend-mode: multiply;
+      opacity: 0.34;
     }
     .cursor-orb::after {
-      inset: 2px 3px 4px 2px;
-      border-radius: 46% 54% 52% 48% / 55% 46% 54% 45%;
-      background: radial-gradient(circle at 61% 67%, rgba(255, 255, 248, 0.34) 0 22%, transparent 48%);
-      opacity: 0.72;
+      inset: 1px;
+      border-radius: inherit;
+      background: radial-gradient(circle at 36% 32%, rgba(255, 255, 248, 0.32) 0 18%, transparent 42%);
+      opacity: 0.76;
     }
-    .cursor-orb.on { opacity: 0.62; }
+    .cursor-orb.on { opacity: 0.66; }
     .cursor-orb.hot {
       background:
-        radial-gradient(circle at 37% 42%, rgba(93, 181, 125, 0.36) 0 25%, rgba(93, 181, 125, 0.16) 41%, transparent 66%),
-        radial-gradient(circle at 68% 68%, rgba(199, 232, 196, 0.34) 0 28%, transparent 56%),
-        radial-gradient(circle at 52% 48%, rgba(247, 249, 226, 0.4) 0%, rgba(188, 225, 197, 0.26) 58%, rgba(14, 123, 74, 0.1) 100%);
+        radial-gradient(circle at 38% 31%, rgba(255, 254, 239, 0.84) 0 20%, transparent 42%),
+        radial-gradient(circle at 68% 72%, rgba(184, 222, 196, 0.34) 0 31%, transparent 60%),
+        linear-gradient(145deg, rgba(250, 244, 220, 0.64), rgba(216, 235, 215, 0.48));
       border-color: rgba(14, 123, 74, 0.18);
-      opacity: 0.76;
+      opacity: 0.78;
     }
   }
 
@@ -1372,13 +1374,13 @@
     });
   }
 
-  /* ---------- ink-wash cursor (desktop, motion allowed) ---------- */
+  /* ---------- paper cursor (desktop, motion allowed) ---------- */
   if (window.matchMedia('(pointer: fine)').matches && !reduce) {
     var orb = document.createElement('div');
     orb.className = 'cursor-orb';
     orb.setAttribute('aria-hidden', 'true');
     document.body.appendChild(orb);
-    var ORB_IDLE = 1, ORB_FOCUS = 1.18;
+    var ORB_IDLE = 1, ORB_FOCUS = 1.12;
     var mx = 0, my = 0, x = 0, y = 0;
     var os = ORB_IDLE, ots = ORB_IDLE;
     var running = false;
@@ -1388,9 +1390,9 @@
       orb.classList.toggle('hot', !!hot);
     }
     function loop() {
-      x += (mx - x) * 0.12;
-      y += (my - y) * 0.12;
-      os += (ots - os) * 0.13;
+      x += (mx - x) * 0.15;
+      y += (my - y) * 0.15;
+      os += (ots - os) * 0.14;
       orb.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + os + ')';
       requestAnimationFrame(loop);
     }
