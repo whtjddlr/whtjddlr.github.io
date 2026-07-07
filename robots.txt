@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://whtjddlr.github.io/sitemap.xml
