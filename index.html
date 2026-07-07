@@ -769,21 +769,21 @@
     .cursor-orb {
       display: block;
       position: fixed;
-      top: -24px; left: -24px;
-      width: 48px; height: 48px;
+      top: -26px; left: -26px;
+      width: 52px; height: 52px;
       border-radius: 56% 44% 49% 51% / 46% 58% 42% 54%;
       background:
-        radial-gradient(ellipse at 44% 47%, rgba(160, 217, 185, 0.31) 0%, rgba(203, 232, 209, 0.24) 38%, rgba(250, 244, 222, 0.17) 61%, transparent 78%),
-        radial-gradient(circle at 66% 34%, rgba(255, 250, 229, 0.28) 0 18%, transparent 48%),
-        radial-gradient(circle at 28% 70%, rgba(14, 123, 74, 0.08) 0 20%, transparent 58%);
+        radial-gradient(ellipse at 44% 47%, rgba(147, 211, 176, 0.36) 0%, rgba(199, 231, 207, 0.27) 38%, rgba(250, 244, 222, 0.19) 61%, transparent 80%),
+        radial-gradient(circle at 66% 34%, rgba(255, 250, 229, 0.3) 0 18%, transparent 49%),
+        radial-gradient(circle at 28% 70%, rgba(14, 123, 74, 0.1) 0 20%, transparent 60%);
       overflow: hidden;
       pointer-events: none;
       z-index: 70;
       opacity: 0;
-      filter: blur(0.45px) saturate(0.96);
+      filter: blur(0.28px) saturate(1);
       mix-blend-mode: multiply;
-      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 0 48%, rgba(0, 0, 0, 0.68) 64%, transparent 100%);
-      mask-image: radial-gradient(ellipse at 50% 50%, #000 0 48%, rgba(0, 0, 0, 0.68) 64%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 0 53%, rgba(0, 0, 0, 0.72) 69%, transparent 100%);
+      mask-image: radial-gradient(ellipse at 50% 50%, #000 0 53%, rgba(0, 0, 0, 0.72) 69%, transparent 100%);
       transition: opacity 0.24s ease, background 0.24s ease, filter 0.24s ease;
       will-change: transform;
     }
@@ -814,14 +814,14 @@
       background-size: 13px 13px, 17px 17px, 19px 19px;
       opacity: 0.42;
     }
-    .cursor-orb.on { opacity: 0.58; }
+    .cursor-orb.on { opacity: 0.66; }
     .cursor-orb.hot {
       background:
-        radial-gradient(ellipse at 44% 47%, rgba(145, 209, 174, 0.36) 0%, rgba(196, 229, 204, 0.28) 39%, rgba(250, 244, 222, 0.19) 62%, transparent 79%),
-        radial-gradient(circle at 66% 34%, rgba(255, 250, 229, 0.32) 0 20%, transparent 50%),
-        radial-gradient(circle at 28% 70%, rgba(14, 123, 74, 0.1) 0 22%, transparent 60%);
-      filter: blur(0.38px) saturate(1);
-      opacity: 0.7;
+        radial-gradient(ellipse at 44% 47%, rgba(135, 204, 166, 0.4) 0%, rgba(190, 228, 201, 0.31) 39%, rgba(250, 244, 222, 0.21) 62%, transparent 80%),
+        radial-gradient(circle at 66% 34%, rgba(255, 250, 229, 0.34) 0 20%, transparent 51%),
+        radial-gradient(circle at 28% 70%, rgba(14, 123, 74, 0.12) 0 22%, transparent 62%);
+      filter: blur(0.22px) saturate(1.03);
+      opacity: 0.78;
     }
     @keyframes watercolor-edge {
       from { border-radius: 47% 53% 56% 44% / 55% 43% 57% 45%; opacity: 0.64; }
