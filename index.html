@@ -757,41 +757,51 @@
     pointer-events: none;
   }
 
-  /* ---------- cursor light (fine pointer only) ---------- */
-  .cursor-glow { display: none; }
+  /* ---------- pastel cursor (fine pointer only) ---------- */
+  .cursor-orb { display: none; }
   @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .cursor-glow {
+    body.cursor-ready,
+    body.cursor-ready a,
+    body.cursor-ready button,
+    body.cursor-ready .shot img {
+      cursor: none;
+    }
+    .cursor-orb {
       display: block;
       position: fixed;
-      top: -170px; left: -170px;
-      width: 340px; height: 340px;
+      top: -17px; left: -17px;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      background: radial-gradient(circle,
-        rgba(255, 252, 214, 0.62) 0%,
-        rgba(23, 163, 95, 0.18) 26%,
-        rgba(154, 106, 0, 0.1) 48%,
-        rgba(23, 163, 95, 0) 72%);
+      background:
+        radial-gradient(circle at 34% 28%, rgba(255, 255, 248, 0.82) 0 18%, transparent 19%),
+        radial-gradient(circle at 72% 76%, rgba(255, 198, 177, 0.34) 0 32%, transparent 33%),
+        radial-gradient(circle at 40% 58%, rgba(178, 225, 194, 0.5) 0%, rgba(255, 250, 220, 0.42) 56%, rgba(255, 218, 208, 0.3) 100%);
+      border: 1px solid rgba(14, 123, 74, 0.18);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.42),
+        0 3px 10px rgba(27, 35, 31, 0.055);
       pointer-events: none;
-      z-index: 50;
+      z-index: 70;
       opacity: 0;
-      filter: blur(6px);
-      transition: opacity 0.34s ease, background 0.28s ease;
+      -webkit-backdrop-filter: blur(2px) saturate(1.08);
+      backdrop-filter: blur(2px) saturate(1.08);
+      transition: opacity 0.22s ease, background 0.24s ease, border-color 0.24s ease;
       will-change: transform;
     }
-    .cursor-glow.on { opacity: 0.58; }
-    .cursor-glow.hot {
-      background: radial-gradient(circle,
-        rgba(255, 252, 214, 0.74) 0%,
-        rgba(23, 163, 95, 0.26) 28%,
-        rgba(154, 106, 0, 0.12) 50%,
-        rgba(23, 163, 95, 0) 74%);
-      opacity: 0.72;
+    .cursor-orb.on { opacity: 0.68; }
+    .cursor-orb.hot {
+      background:
+        radial-gradient(circle at 34% 28%, rgba(255, 255, 248, 0.9) 0 18%, transparent 19%),
+        radial-gradient(circle at 72% 76%, rgba(255, 190, 169, 0.42) 0 34%, transparent 35%),
+        radial-gradient(circle at 40% 58%, rgba(166, 220, 187, 0.58) 0%, rgba(255, 250, 220, 0.5) 56%, rgba(255, 215, 205, 0.36) 100%);
+      border-color: rgba(14, 123, 74, 0.26);
+      opacity: 0.82;
     }
   }
 
   /* ---------- print ---------- */
   @media print {
-    .topbar, .progress, .cursor-glow { display: none; }
+    .topbar, .progress, .cursor-orb { display: none; }
     .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
     .live-dot { animation: none; }
     .link-out { color: var(--ink); }
@@ -1340,31 +1350,32 @@
     });
   }
 
-  /* ---------- cursor glow (desktop, motion allowed) ---------- */
+  /* ---------- pastel cursor (desktop, motion allowed) ---------- */
   if (window.matchMedia('(pointer: fine)').matches && !reduce) {
-    var glow = document.createElement('div');
-    glow.className = 'cursor-glow';
-    glow.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(glow);
-    var GLOW_IDLE = 1, GLOW_FOCUS = 1.12;
+    var orb = document.createElement('div');
+    orb.className = 'cursor-orb';
+    orb.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(orb);
+    var ORB_IDLE = 1, ORB_FOCUS = 1.14;
     var mx = 0, my = 0, x = 0, y = 0;
-    var gs = GLOW_IDLE, gts = GLOW_IDLE;
+    var os = ORB_IDLE, ots = ORB_IDLE;
     var running = false;
     function setCursorTarget(target) {
       var hot = target && target.closest && target.closest('a, button, .shot img');
-      gts = hot ? GLOW_FOCUS : GLOW_IDLE;
-      glow.classList.toggle('hot', !!hot);
+      ots = hot ? ORB_FOCUS : ORB_IDLE;
+      orb.classList.toggle('hot', !!hot);
     }
     function loop() {
-      x += (mx - x) * 0.12;
-      y += (my - y) * 0.12;
-      gs += (gts - gs) * 0.1;
-      glow.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + gs + ')';
+      x += (mx - x) * 0.2;
+      y += (my - y) * 0.2;
+      os += (ots - os) * 0.16;
+      orb.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + os + ')';
       requestAnimationFrame(loop);
     }
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY;
-      glow.classList.add('on');
+      document.body.classList.add('cursor-ready');
+      orb.classList.add('on');
       setCursorTarget(e.target);
       if (!running) { running = true; x = mx; y = my; loop(); }
     }, { passive: true });
@@ -1372,7 +1383,8 @@
       setCursorTarget(e.target);
     }, true);
     document.documentElement.addEventListener('mouseleave', function () {
-      glow.classList.remove('on');
+      orb.classList.remove('on');
+      document.body.classList.remove('cursor-ready');
     });
   }
 })();
