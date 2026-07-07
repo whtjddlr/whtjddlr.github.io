@@ -757,7 +757,7 @@
     pointer-events: none;
   }
 
-  /* ---------- pastel cursor (fine pointer only) ---------- */
+  /* ---------- ink-wash cursor (fine pointer only) ---------- */
   .cursor-orb { display: none; }
   @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
     body.cursor-ready,
@@ -769,33 +769,55 @@
     .cursor-orb {
       display: block;
       position: fixed;
-      top: -17px; left: -17px;
-      width: 34px; height: 34px;
-      border-radius: 50%;
+      top: -21px; left: -21px;
+      width: 42px; height: 42px;
+      border-radius: 48% 52% 51% 49% / 47% 45% 55% 53%;
       background:
-        radial-gradient(circle at 34% 28%, rgba(255, 255, 248, 0.82) 0 18%, transparent 19%),
-        radial-gradient(circle at 72% 76%, rgba(255, 198, 177, 0.34) 0 32%, transparent 33%),
-        radial-gradient(circle at 40% 58%, rgba(178, 225, 194, 0.5) 0%, rgba(255, 250, 220, 0.42) 56%, rgba(255, 218, 208, 0.3) 100%);
-      border: 1px solid rgba(14, 123, 74, 0.18);
+        radial-gradient(circle at 37% 42%, rgba(109, 190, 138, 0.3) 0 24%, rgba(109, 190, 138, 0.13) 39%, transparent 64%),
+        radial-gradient(circle at 68% 68%, rgba(202, 232, 198, 0.3) 0 26%, transparent 54%),
+        radial-gradient(circle at 52% 48%, rgba(247, 249, 226, 0.36) 0%, rgba(198, 229, 204, 0.22) 58%, rgba(14, 123, 74, 0.08) 100%);
+      border: 1px solid rgba(14, 123, 74, 0.12);
       box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.42),
-        0 3px 10px rgba(27, 35, 31, 0.055);
+        inset 0 0 0 1px rgba(255, 255, 255, 0.34),
+        inset 0 -8px 14px rgba(14, 123, 74, 0.035),
+        0 3px 9px rgba(27, 35, 31, 0.045);
+      overflow: hidden;
       pointer-events: none;
       z-index: 70;
       opacity: 0;
-      -webkit-backdrop-filter: blur(2px) saturate(1.08);
-      backdrop-filter: blur(2px) saturate(1.08);
-      transition: opacity 0.22s ease, background 0.24s ease, border-color 0.24s ease;
+      filter: blur(0.15px);
+      transition: opacity 0.24s ease, background 0.24s ease, border-color 0.24s ease;
       will-change: transform;
     }
-    .cursor-orb.on { opacity: 0.68; }
+    .cursor-orb::before,
+    .cursor-orb::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+    .cursor-orb::before {
+      inset: 6px 7px 8px 5px;
+      border-radius: 54% 46% 45% 55% / 48% 57% 43% 52%;
+      background:
+        radial-gradient(circle at 35% 45%, rgba(14, 123, 74, 0.18) 0 30%, transparent 62%),
+        radial-gradient(circle at 72% 34%, rgba(154, 106, 0, 0.06) 0 28%, transparent 56%);
+      filter: blur(1.3px);
+      opacity: 0.62;
+    }
+    .cursor-orb::after {
+      inset: 2px 3px 4px 2px;
+      border-radius: 46% 54% 52% 48% / 55% 46% 54% 45%;
+      background: radial-gradient(circle at 61% 67%, rgba(255, 255, 248, 0.34) 0 22%, transparent 48%);
+      opacity: 0.72;
+    }
+    .cursor-orb.on { opacity: 0.62; }
     .cursor-orb.hot {
       background:
-        radial-gradient(circle at 34% 28%, rgba(255, 255, 248, 0.9) 0 18%, transparent 19%),
-        radial-gradient(circle at 72% 76%, rgba(255, 190, 169, 0.42) 0 34%, transparent 35%),
-        radial-gradient(circle at 40% 58%, rgba(166, 220, 187, 0.58) 0%, rgba(255, 250, 220, 0.5) 56%, rgba(255, 215, 205, 0.36) 100%);
-      border-color: rgba(14, 123, 74, 0.26);
-      opacity: 0.82;
+        radial-gradient(circle at 37% 42%, rgba(93, 181, 125, 0.36) 0 25%, rgba(93, 181, 125, 0.16) 41%, transparent 66%),
+        radial-gradient(circle at 68% 68%, rgba(199, 232, 196, 0.34) 0 28%, transparent 56%),
+        radial-gradient(circle at 52% 48%, rgba(247, 249, 226, 0.4) 0%, rgba(188, 225, 197, 0.26) 58%, rgba(14, 123, 74, 0.1) 100%);
+      border-color: rgba(14, 123, 74, 0.18);
+      opacity: 0.76;
     }
   }
 
@@ -1350,13 +1372,13 @@
     });
   }
 
-  /* ---------- pastel cursor (desktop, motion allowed) ---------- */
+  /* ---------- ink-wash cursor (desktop, motion allowed) ---------- */
   if (window.matchMedia('(pointer: fine)').matches && !reduce) {
     var orb = document.createElement('div');
     orb.className = 'cursor-orb';
     orb.setAttribute('aria-hidden', 'true');
     document.body.appendChild(orb);
-    var ORB_IDLE = 1, ORB_FOCUS = 1.14;
+    var ORB_IDLE = 1, ORB_FOCUS = 1.18;
     var mx = 0, my = 0, x = 0, y = 0;
     var os = ORB_IDLE, ots = ORB_IDLE;
     var running = false;
@@ -1366,9 +1388,9 @@
       orb.classList.toggle('hot', !!hot);
     }
     function loop() {
-      x += (mx - x) * 0.2;
-      y += (my - y) * 0.2;
-      os += (ots - os) * 0.16;
+      x += (mx - x) * 0.12;
+      y += (my - y) * 0.12;
+      os += (ots - os) * 0.13;
       orb.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + os + ')';
       requestAnimationFrame(loop);
     }
