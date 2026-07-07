@@ -243,11 +243,11 @@ gh api repos/whtjddlr/whtjddlr.github.io/pages/builds --jq '.[0].status'  # buil
 - 개인 이메일 노출 방지를 위해 이 저장소의 git identity는
   `조성익 <{github-id}+whtjddlr@users.noreply.github.com>` 사용 (이미 설정돼 있으면 유지).
 
-## 8.5 진행 중 작업 — 2026.07 디자인 마감 (설계 확정, 순서대로 구현)
+## 8.5 진행 중 작업 — 2026.07 디자인 마감 (완료)
 
 > 세션이 끊겨도 이어받을 수 있도록 설계를 먼저 기록. 각 항목 완료 시 체크하고 커밋할 것.
 
-- [ ] **A. 히어로 사진 프레임 재설계** (아치 → "서류에 부착된 사진")
+- [x] **A. 히어로 사진 프레임 재설계** (아치 → "서류에 부착된 사진")
   - `.hero-photo::before`의 그라데이션 블롭 제거, `.photo-frame` 아치 radius 제거
   - 새 처리: 직사각형 + 흰 매트(패딩 7px, 배경 #fff) + 헤어라인 보더 + radius 3px
     + 은은한 그림자 유지
@@ -255,14 +255,14 @@ gh api repos/whtjddlr/whtjddlr.github.io/pages/builds --jq '.[0].status'  # buil
     (1px, `--line-strong`), 프레임에서 7px 바깥
   - 모바일(720px 이하)도 동일 문법, 기존 아치 오버라이드 제거
   - 인트로 애니메이션(hero-photo-in)·패럴랙스·호버 리프트는 유지
-- [ ] **B. 스크린샷 매트 통일** (CARCH 목업 vs 생캡처 언어 불일치 해소)
+- [x] **B. 스크린샷 매트 통일** (CARCH 목업 vs 생캡처 언어 불일치 해소)
   - `.shot img`에 흰 매트: `background: #fff; padding: 5px;` (모든 스샷 공통 액자)
   - `.shots.wide .shot img` 높이 188 → 200px (모바일 160 → 168px) — PlanMerge 판독성
   - 라이트박스는 그대로 (이미 흰 배경)
-- [ ] **C. 워드마크 교체** — "just do it"(나이키 차용 리스크) → **"끝까지."**
+- [x] **C. 워드마크 교체** — "just do it"(나이키 차용 리스크) → **"끝까지."**
   (본인 인용구의 핵심 단어 + "마침표를 찍는 사람" 의미. 마침표만 `--signal` 색)
   - `.brand`를 Georgia 이탤릭 → `--sans` 800 웨이트로, `.brand-dot` 스타일 추가
-- [ ] **D. 전용 OG 이미지** — `shots/og.png` 1200×630 생성 (PIL + Pretendard 정적 폰트)
+- [x] **D. 전용 OG 이미지** — `shots/og.png` 1200×630 생성 (PIL + Pretendard 정적 폰트)
   - 구성: paper 배경 + 네이비 타이포("조성익 / 직접 만들 수 있는 기획자") +
     하단에 "SSAFY AI 챌린지 전국 1위 · 라이브 서비스 5개" + 금색 포인트 라인
   - `og:image`·`twitter:image`를 shots/og.png로 교체, `og:image:width/height` 추가
@@ -287,7 +287,7 @@ gh api repos/whtjddlr/whtjddlr.github.io/pages/builds --jq '.[0].status'  # buil
 
 **폴리시:**
 
-- [ ] 전용 OG 이미지 제작 (현재는 award.jpg 재사용)
+- [x] 전용 OG 이미지 제작 → `shots/og.png` (2026.07 완료)
 - [ ] GitHub 프로필 README(whtjddlr/whtjddlr)에 포트폴리오 링크 추가
 - [ ] 방문 분석 (개인정보 최소 수집 도구, 소유자 승인 필요)
 - [ ] 영문 버전
