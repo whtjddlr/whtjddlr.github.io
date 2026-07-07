@@ -102,16 +102,16 @@
     gap: 16px;
   }
   .topbar .brand {
-    font-family: Georgia, "Times New Roman", serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: -0.015em;
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.02em;
     display: inline-flex;
     align-items: baseline;
     white-space: nowrap;
     color: var(--ink);
   }
+  .topbar .brand .brand-dot { color: var(--signal); }
   .topbar-links { display: flex; gap: 18px; }
   .topbar-links a {
     font-family: var(--sans);
@@ -235,19 +235,31 @@
     position: relative;
     margin: 0;
   }
-  .hero-photo::before {
+  /* 서류에 부착된 사진 — 흰 매트 + 크롭마크 (아치·그라데이션 블롭은 트로프라 폐기) */
+  .hero-photo::before,
+  .hero-photo::after {
     content: "";
     position: absolute;
-    inset: 0 0 34px 0;
-    border-radius: 132px 132px 20px 20px;
-    background: linear-gradient(160deg, rgba(24, 58, 102, 0.18), rgba(46, 110, 166, 0.12));
-    transform: translate(16px, 14px);
-    z-index: -1;
+    width: 18px; height: 18px;
+    border: 0 solid var(--line-strong);
+    pointer-events: none;
+  }
+  .hero-photo::before {
+    top: -7px; left: -7px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+  }
+  .hero-photo::after {
+    right: -7px; bottom: 27px; /* 프레임 하단(캡션 위 34px)에서 7px 바깥 */
+    border-bottom-width: 1px;
+    border-right-width: 1px;
   }
   .photo-frame {
-    border-radius: 132px 132px 20px 20px;
-    overflow: hidden;
-    box-shadow: 0 28px 48px -30px rgba(27, 35, 31, 0.4);
+    background: #fff;
+    padding: 7px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    box-shadow: 0 18px 36px -26px rgba(23, 32, 51, 0.4);
   }
   .photo-frame img {
     width: 100%;
@@ -596,11 +608,13 @@
     height: 252px;
     width: auto;
     display: block;
+    background: #fff;
+    padding: 5px; /* 흰 매트 — 목업/생캡처 혼재를 하나의 액자 언어로 통일 */
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: zoom-in;
   }
-  .shots.wide .shot img { height: 188px; border-radius: 6px; }
+  .shots.wide .shot img { height: 200px; border-radius: 6px; }
   .shot figcaption {
     font-family: var(--mono);
     font-size: 10.5px;
@@ -921,11 +935,6 @@
     .hero { min-height: 0; }
     .hero-grid { grid-template-columns: 1fr; gap: 28px; padding: 30px 0 8px; }
     .hero-photo { grid-column: 1; grid-row: 1; justify-self: center; width: 178px; }
-    .hero-photo::before {
-      border-radius: 90px 90px 14px 14px;
-      transform: translate(12px, 10px);
-    }
-    .photo-frame { border-radius: 90px 90px 14px 14px; }
     .hero-main { grid-column: 1; grid-row: 2; }
     .hero .eyebrow { margin-bottom: 20px; }
     .pull { margin-top: 28px; }
@@ -942,7 +951,7 @@
     .entry-meta { display: flex; align-items: center; gap: 14px; }
     .live-badge { margin-top: 0; }
     .shot img { height: 220px; }
-    .shots.wide .shot img { height: 160px; }
+    .shots.wide .shot img { height: 168px; }
     .shots {
       padding-right: 22px;
       -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 22px), transparent 100%);
@@ -957,9 +966,7 @@
 
 <nav class="topbar" aria-label="페이지 내 이동">
   <div class="topbar-in">
-    <a class="brand" href="#top">
-      <span class="brand-main">just do it</span>
-    </a>
+    <a class="brand" href="#top">끝까지<span class="brand-dot">.</span></a>
     <div class="topbar-links">
       <a href="#award">수상</a>
       <a href="#projects">프로젝트</a>
