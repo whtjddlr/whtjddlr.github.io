@@ -795,6 +795,25 @@
     padding: 4px 11px;
   }
   .role-note strong { color: var(--ink); font-weight: 600; }
+  .evidence-note {
+    max-width: 42em;
+    margin-top: 16px;
+    padding: 9px 0 9px 14px;
+    border-left: 2px solid var(--signal);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .evidence-note .label {
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--signal);
+  }
+  .evidence-note strong { color: var(--ink); font-weight: 700; }
   .entry ul {
     margin: 16px 0 0;
     padding: 0;
@@ -1390,6 +1409,8 @@
           <a class="link-out" href="https://github.com/whtjddlr" target="_blank" rel="noopener">GitHub ↗</a>
           <a class="link-out" href="https://blog.naver.com/solist-" target="_blank" rel="noopener">Blog ↗</a>
           <a class="link-out" href="mailto:choim2008@naver.com">choim2008@naver.com</a>
+          <!-- 이력서 준비 후 루트에 resume.pdf를 추가하고 hidden 속성만 제거하면 됩니다. -->
+          <a class="link-out" href="resume.pdf" target="_blank" rel="noopener" data-resume-link hidden>Resume ↗</a>
         </nav>
       </div>
       <figure class="hero-photo">
@@ -1505,10 +1526,10 @@
           출처를 섹션별로 추적합니다.
         </p>
         <span class="role-note">역할 — <strong>기획·스펙 문서·ERD 설계·개발·배포 단독 수행</strong></span>
+        <p class="evidence-note"><span class="label">검증 근거</span>PM·디자이너·개발자·세일즈·마케터 관점의 초안 <strong>13개</strong>와 의도적으로 심은 <strong>MVP 범위 충돌 1건</strong>으로, 채택·제외·충돌 추적이 실제로 드러나는지 점검했습니다.</p>
         <ul>
           <li><strong>문제 정의</strong> — “LLM에 초안을 다 넣으면 그럴듯한 문서는 나오지만, 반영·제외·충돌·근거라는 협업의 핵심 질문이 남는다”에서 출발</li>
           <li><strong>품질 게이트</strong> — 섹션 커버리지·출처 커버리지·선택지 추적성을 점수화해, 내보내기 전에 병합 품질을 확인</li>
-          <li><strong>검증 샘플 설계</strong> — PM·디자이너·개발자·세일즈·마케터 관점의 초안 13개로 샘플을 구성하고, MVP 범위 충돌 1건을 의도적으로 심어 제품 가치가 바로 드러나게 함</li>
           <li><strong>문서 선행</strong> — v0.1 스펙 문서와 ERD를 먼저 작성한 뒤 개발 착수</li>
         </ul>
         <div class="shots wide">
@@ -1544,9 +1565,9 @@
           올리는 것이 제품 원칙입니다.
         </p>
         <span class="role-note">역할 — <strong>백엔드 API · 데이터 모델링 · 혜택 데이터 정제 · 추천 로직 · AI 연동 · 배포 구조</strong></span>
+        <p class="evidence-note"><span class="label">검증 근거</span>App Store 기준 서비스 채널과 자동 로그인 데모 채널을 같은 코드베이스에서 환경변수·DB 스키마로 분리해, <strong>실제 운영과 발표 흐름을 함께 검증</strong>했습니다.</p>
         <ul>
           <li><strong>AI 역할 원칙</strong> — 생성형 AI가 숫자를 새로 만들지 않고, 규칙 기반 계산 결과를 사용자가 이해하기 쉽게 설명만 하도록 역할을 분리</li>
-          <li><strong>채널 운영 설계</strong> — 같은 코드베이스에서 환경변수·DB 스키마를 분리해 App Store 기준 서비스 채널과 발표용 자동 로그인 데모 채널을 함께 운영</li>
           <li><strong>스토어 요건 완수</strong> — Capacitor iOS 셸, Keychain 토큰 저장, 계정 삭제, 개인정보 처리방침 등 App Store 검수 요건 충족</li>
         </ul>
         <div class="shots">
@@ -1582,10 +1603,9 @@
           흐름으로 재설계해, 최종 선택을 추첨으로 만들어 갈등 자체를 제거했습니다.
         </p>
         <span class="role-note">역할 — <strong>기획 · UI/UX · 프론트엔드 · 서버리스 API · DB 연동 전 범위</strong></span>
+        <p class="evidence-note"><span class="label">검증 근거</span>회원가입 없는 초대 링크로 참여하고, 참가자 레디 상태와 카드·사다리·돌림판 결과를 방 단위로 동기화하는 <strong>전체 참여 흐름을 라이브 서비스로 배포</strong>했습니다.</p>
         <ul>
           <li><strong>공평함의 수치화</strong> — 참가자별 대중교통·자동차 이동 시간을 NAVER Maps + ODsay 실경로로 보정해, 이동 시간 편차 기준으로 후보를 좁힘</li>
-          <li><strong>같이 있는 경험</strong> — Supabase Realtime으로 레디 상태와 카드·사다리·돌림판 추첨을 방 단위 실시간 동기화</li>
-          <li><strong>참여 장벽 최소화</strong> — 회원가입 없이 초대 링크만으로 게스트 참여가 가능하도록 흐름을 설계</li>
           <li><strong>장애 대비</strong> — AI 후보 재정렬을 GMS·OpenAI·Upstage 폴백 체인으로 묶어 한 provider가 죽어도 동작</li>
         </ul>
         <div class="shots">
@@ -1618,11 +1638,11 @@
           중요한 상황에서 출발 시각 추천과 이동 중 행동 지시까지 제공하는 PWA입니다.
         </p>
         <span class="role-note">역할 — <strong>기획 · 설계 · 개발 · 테스트 · 배포 단독 수행</strong></span>
+        <p class="evidence-note"><span class="label">검증 근거</span>ETA 산식·GPS 투영·신호 파싱을 <strong>vitest 59건 + Playwright E2E</strong>로 검증하고, 외부 API 키는 서버리스 프록시 뒤에서 보호했습니다.</p>
         <ul>
           <li><strong>데이터를 행동으로 번역</strong> — 보행 신호 잔여 초를 그대로 보여주지 않고, 예상 횡단 시간과 비교해 “지금 건너세요 / N초 후 보행 신호”라는 행동 판단으로 변환하는 것이 제품 원칙</li>
           <li><strong>사용자 성향의 제품화</strong> — 안전 우선(버퍼 5분) / 균형(3분) / 정시 우선(1분)의 도착 전략 3모드를 실시간 비교·전환</li>
           <li><strong>개인화 학습</strong> — 키 기반 보폭 추정에서 시작해 GPS 실측 보행 속도를 학습, 샘플 10개부터 실측 우선 적용</li>
-          <li><strong>엔지니어링 품질</strong> — ETA 산식·GPS 투영·신호 파싱을 순수 함수로 분리해 vitest 59건 + Playwright E2E로 테스트, API 키는 전부 서버리스 프록시 뒤에서 보호</li>
         </ul>
         <div class="shots">
           <figure class="shot"><img width="340" height="737" src="shots/bbaru-main.jpg" alt="BBARU 메인 검색 화면" loading="lazy"><figcaption>메인 · POI 자동완성</figcaption></figure>
@@ -1654,8 +1674,8 @@
           설계해 지속 동기를 만드는 모바일 우선 프로토타입입니다.
         </p>
         <span class="role-note">역할 — <strong>기획 · 디자인 시스템 · 개발 · 배포 단독 수행</strong></span>
+        <p class="evidence-note"><span class="label">검증 근거</span>사진 인증 → 그룹원 승인 → 보상 지급을 하나의 상호 승인 루프로 연결해, <strong>승인 전에는 보상이 지급되지 않는 흐름</strong>을 모바일 우선 프로토타입으로 구현했습니다.</p>
         <ul>
-          <li><strong>승인 메커니즘 설계</strong> — 미션 인증을 그룹원이 승인해야 보상이 지급되는 상호 승인 루프</li>
           <li><strong>디자인 시스템 문서화</strong> — “픽셀 펫이 유일한 주인공”이라는 Calm Pixel 원칙으로 토큰·아이콘 문법·모션 언어를 문서로 정리</li>
         </ul>
         <div class="shots">
