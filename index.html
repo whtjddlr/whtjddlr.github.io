@@ -1459,23 +1459,55 @@
   <section class="section" id="projects" aria-labelledby="log-title">
     <div class="section-head">
       <h2 id="log-title">프로젝트 — 기획부터 배포까지</h2>
-      <span class="eyebrow" data-index="02">5 Live Services</span>
+      <span class="eyebrow" data-index="02">6 Projects · 5 Live</span>
     </div>
 
     <div class="project-timeline">
       <nav class="project-rail" aria-label="프로젝트 목차">
-        <a class="active" href="#project-planmerge" aria-current="true"><span class="rail-index">01</span><span class="rail-date">2026.05</span></a>
-        <a href="#project-carch"><span class="rail-index">02</span><span class="rail-date">2026.05</span></a>
-        <a href="#project-kok"><span class="rail-index">03</span><span class="rail-date">2026.04</span></a>
-        <a href="#project-bbaru"><span class="rail-index">04</span><span class="rail-date">2026.04</span></a>
-        <a href="#project-godlife"><span class="rail-index">05</span><span class="rail-date">2026.05</span></a>
+        <a class="active" href="#project-aigo" aria-current="true"><span class="rail-index">01</span><span class="rail-date">2026.07</span></a>
+        <a href="#project-planmerge"><span class="rail-index">02</span><span class="rail-date">2026.05</span></a>
+        <a href="#project-carch"><span class="rail-index">03</span><span class="rail-date">2026.05</span></a>
+        <a href="#project-kok"><span class="rail-index">04</span><span class="rail-date">2026.04</span></a>
+        <a href="#project-bbaru"><span class="rail-index">05</span><span class="rail-date">2026.04</span></a>
+        <a href="#project-godlife"><span class="rail-index">06</span><span class="rail-date">2026.05</span></a>
       </nav>
       <div class="project-list">
+
+    <!-- AIGO -->
+    <article class="entry" id="project-aigo">
+      <div class="entry-meta">
+        <span class="entry-index" aria-hidden="true">01</span>
+        <div class="date">2026.07 — 08</div>
+      </div>
+      <div>
+        <h3>AIGO <span class="sub">병원 이동형 AI 키오스크 · 5인 팀 팀장</span></h3>
+        <p class="pitch">
+          고령 환자에게는 진료보다 진료 전까지가 벽입니다 — 작은 글씨의 키오스크 조작, 아픈 곳을
+          "진료과"로 스스로 번역하는 일, 접수처·대기석·진료실 사이의 반복 이동. AIGO는 방향을
+          뒤집어 <strong>키오스크가 자율주행 로봇을 타고 환자를 찾아가게</strong> 했습니다.
+          신분증을 읽고, 증상을 듣고 진료과를 찾아, 진료실 앞까지 안내합니다.
+        </p>
+        <span class="role-note">역할 — <strong>팀장(PM) · 접수 문진 AI 엔진 구현 · 학습 데이터 파이프라인 · 스프린트 운영</strong></span>
+        <p class="evidence-note"><span class="label">검증 근거</span>실서버 문진 시나리오에서 기대 진료과 일치 <strong>16/20</strong>, 어르신 음성으로 파인튜닝한 STT는 동일 검증셋에서 오류율 <strong>7.38% → 0.56%</strong>. 자동화 테스트 AI 508건·Frontend 189건을 MR 단위 CI로 상시 실행했습니다.</p>
+        <ul>
+          <li><strong>확신 없으면 실행하지 않는 설계</strong> — 진료과 분류를 신뢰도 3구간으로 라우팅 (0.78 이상 확정 / 0.55~0.78 되묻기 / 미만 직원 인계). 임계값 0.78은 감이 아니라 "확정 구간 정확도 90% 달성 최소값"으로 검증 데이터에서 산출</li>
+          <li><strong>LLM은 fail-closed 보조</strong> — 질문 선택·답변 해석 등 4가지 역할로 한정하고, 네트워크·스키마 오류 시 결정적 규칙 엔진이 흐름을 단독 완주. LLM 장애가 접수 실패로 번지지 않는 구조</li>
+          <li><strong>팀 운영</strong> — 기획서를 V17까지 개정하며 팀 공통 설계 기준 유지, Jira 스프린트(주간 마감·이월·포인트 배분)와 브랜치·MR 규칙으로 4주 230+ 커밋 관리</li>
+        </ul>
+        <div class="shots">
+          <figure class="shot"><img width="440" height="484" src="shots/aigo-concept.jpg" alt="AIGO 서비스 컨셉 — 키오스크와 대화하는 어르신" loading="lazy"><figcaption>서비스 컨셉</figcaption></figure>
+          <figure class="shot"><img width="680" height="388" src="shots/aigo-vad.jpg" alt="적응형 음성 감지 설계 다이어그램 — 주변 소음 기준선과 무음 900ms 자동 종료" loading="lazy"><figcaption>적응형 음성 감지(VAD) 설계</figcaption></figure>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Spring Boot</span><span class="tag">FastAPI</span><span class="tag">KLUE-RoBERTa</span><span class="tag">Whisper LoRA</span><span class="tag">ROS2 · Nav2</span>
+        </div>
+      </div>
+    </article>
 
     <!-- PlanMerge -->
     <article class="entry" id="project-planmerge">
       <div class="entry-meta">
-        <span class="entry-index" aria-hidden="true">01</span>
+        <span class="entry-index" aria-hidden="true">02</span>
         <div class="date">2026.05 —</div>
         <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       </div>
@@ -1514,7 +1546,7 @@
     <!-- CARCH -->
     <article class="entry" id="project-carch">
       <div class="entry-meta">
-        <span class="entry-index" aria-hidden="true">02</span>
+        <span class="entry-index" aria-hidden="true">03</span>
         <div class="date">2026.05 —</div>
         <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       </div>
@@ -1552,7 +1584,7 @@
     <!-- KOK -->
     <article class="entry" id="project-kok">
       <div class="entry-meta">
-        <span class="entry-index" aria-hidden="true">03</span>
+        <span class="entry-index" aria-hidden="true">04</span>
         <div class="date">2026.04 —</div>
         <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       </div>
@@ -1588,7 +1620,7 @@
     <!-- BBARU -->
     <article class="entry" id="project-bbaru">
       <div class="entry-meta">
-        <span class="entry-index" aria-hidden="true">04</span>
+        <span class="entry-index" aria-hidden="true">05</span>
         <div class="date">2026.04 —</div>
         <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       </div>
@@ -1624,7 +1656,7 @@
     <!-- godlife -->
     <article class="entry" id="project-godlife">
       <div class="entry-meta">
-        <span class="entry-index" aria-hidden="true">05</span>
+        <span class="entry-index" aria-hidden="true">06</span>
         <div class="date">2026.05 —</div>
         <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       </div>
@@ -1716,7 +1748,7 @@
       <a class="link-out" href="https://github.com/whtjddlr" target="_blank" rel="noopener">github.com/whtjddlr ↗</a>
       <a class="link-out" href="https://blog.naver.com/solist-" target="_blank" rel="noopener">blog.naver.com/solist- ↗</a>
     </div>
-    <span class="fine">CHO SUNGIK · UPDATED 2026.07</span>
+    <span class="fine">CHO SUNGIK · UPDATED 2026.08</span>
   </footer>
 
 </div>
