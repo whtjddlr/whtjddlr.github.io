@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="AI 영상 제작/기획 포트폴리오. Enemy, Lose My Mind, CORTIS FaSHioN 제작 기록과 영상 제작 흐름." />
+    <meta property="og:title" content="AI 영상 제작/기획 포트폴리오" />
+    <meta property="og:description" content="AI 뮤직비디오 대표 작업과 제작 흐름." />
+    <title>AI 영상 제작/기획 포트폴리오</title>
+    <style>
+      :root {
+        --green: #00c73c;
+        --green-deep: #078c32;
+        --ink: #111111;
+        --muted: #5d645f;
+        --line: #dde2de;
+        --soft: #f4f8f4;
+        --dark: #101810;
+        --max: 1240px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; text-decoration: none; }
+      img, video { display: block; max-width: 100%; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      :focus-visible { outline: 3px solid rgba(0, 199, 60, .42); outline-offset: 4px; }
+      [data-zoomable] { cursor: zoom-in; }
+
+      .wrap { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
+      .hero {
+        display: flex;
+        min-height: 720px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 54px 0 66px;
+      }
+      .eyebrow,
+      .section-index,
+      .card-index {
+        margin: 0 0 18px;
+        color: var(--green-deep);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(104px, 14vw, 188px);
+        font-weight: 900;
+        letter-spacing: -.095em;
+        line-height: .82;
+        white-space: nowrap;
+      }
+      .hero h1 span {
+        color: var(--green);
+        font: inherit;
+      }
+      .hero-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 32px;
+        padding-top: 20px;
+        border-top: 6px solid var(--green);
+      }
+      .hero-target {
+        margin: 0;
+        color: var(--green-deep);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: .06em;
+      }
+      .hero-title-lockup {
+        margin: 96px 0 72px;
+      }
+      .hero-bottom {
+        display: grid;
+        grid-template-columns: minmax(320px, .8fr) minmax(0, 1.2fr);
+        align-items: start;
+        gap: 84px;
+        padding-top: 24px;
+        border-top: 1px solid var(--ink);
+      }
+      .hero-keyword-label {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--green-deep);
+        font-size: 12px;
+        letter-spacing: .12em;
+      }
+      .hero-keywords {
+        display: block;
+        font-size: clamp(18px, 2vw, 23px);
+        letter-spacing: -.035em;
+        line-height: 1.45;
+      }
+      .hero-project p {
+        max-width: 620px;
+        margin: 10px 0 0;
+        color: #454c47;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .section { padding: 80px 0; border-top: 1px solid var(--line); }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(28px, 3.4vw, 44px);
+        font-weight: 900;
+        letter-spacing: -.05em;
+        line-height: 1.12;
+      }
+      .section-action {
+        color: var(--green-deep);
+        font-size: 13px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .work-card { min-width: 0; }
+      .thumb {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        background: #dfe4df;
+      }
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+      }
+      .work-card:hover .thumb img { transform: scale(1.045); }
+      .thumb-meta {
+        position: absolute;
+        inset: 12px 12px auto;
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: .08em;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, .45);
+        text-transform: uppercase;
+      }
+      .work-info {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 15px 0 0;
+      }
+      .work-info h3 {
+        margin: 0;
+        font-size: 18px;
+        letter-spacing: -.03em;
+      }
+      .work-info p { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+      .work-open {
+        flex: none;
+        color: var(--green-deep);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .08em;
+      }
+
+      .flow-section { background: var(--soft); }
+      .flow-lead {
+        max-width: 900px;
+        margin: 0 0 30px;
+        color: #454c47;
+        font-size: 18px;
+        letter-spacing: -.025em;
+        line-height: 1.7;
+      }
+      .flow-map {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr);
+        align-items: stretch;
+        gap: 10px;
+        margin: 38px 0 26px;
+      }
+      .flow-points {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+      .flow-point {
+        position: relative;
+        padding: 18px 18px 18px 22px;
+        border-left: 3px solid var(--green);
+        background: #fff;
+      }
+      .flow-point b { color: var(--green-deep); font-size: 11px; letter-spacing: .1em; }
+      .flow-point strong { display: block; margin-top: 9px; font-size: 17px; letter-spacing: -.03em; }
+      .flow-point span { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+      .flow-step {
+        display: grid;
+        align-content: space-between;
+        min-height: 112px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .flow-step.is-key { border-color: var(--green); box-shadow: inset 0 -3px 0 var(--green); }
+      .flow-step b { color: var(--green-deep); font-size: 12px; letter-spacing: .1em; }
+      .flow-step strong { font-size: 18px; letter-spacing: -.035em; }
+      .flow-step span { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+      .flow-arrow {
+        display: grid;
+        place-items: center;
+        color: var(--green-deep);
+        font-size: 23px;
+        font-weight: 300;
+      }
+      .flow-evidence {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .flow-card { overflow: hidden; background: #fff; border: 1px solid var(--line); }
+      .flow-card header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 14px 11px;
+        border-bottom: 1px solid var(--line);
+      }
+      .flow-card header span { color: var(--green-deep); font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+      .flow-card header strong { font-size: 15px; letter-spacing: -.03em; }
+      .flow-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+      .flow-card footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 14px;
+        border-top: 1px solid var(--line);
+      }
+      .flow-card footer strong { font-size: 13px; letter-spacing: -.02em; }
+      .flow-card footer span { color: var(--muted); font-size: 11px; font-weight: 800; }
+      .flow-loop {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: .14em;
+      }
+      .flow-loop i { display: block; width: 34px; height: 1px; background: var(--green); }
+      .flow-loop b { color: var(--green-deep); font-size: 18px; font-weight: 400; }
+
+      .insight-section { background: var(--dark); color: #fff; }
+      .insight-section .section-index { color: #79e9a1; }
+      .insight-lead {
+        max-width: 850px;
+        margin: 0 0 30px;
+        color: #e1e9e2;
+        font-size: clamp(18px, 2.35vw, 30px);
+        letter-spacing: -.045em;
+        line-height: 1.48;
+      }
+      .insight-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: rgba(255,255,255,.16);
+      }
+      .insight-item {
+        min-height: 165px;
+        padding: 22px 18px;
+        background: #182119;
+      }
+      .insight-item b { color: #79e9a1; font-size: 12px; letter-spacing: .1em; }
+      .insight-item strong { display: block; margin-top: 18px; font-size: 18px; letter-spacing: -.035em; }
+      .insight-item span { display: block; margin-top: 9px; color: #c3cec5; font-size: 13px; line-height: 1.7; }
+      .planmerge-section { padding-bottom: 120px; }
+      .planmerge-card {
+        padding: 32px;
+        border: 1px solid var(--line);
+        background: var(--soft);
+      }
+      .planmerge-card h2 { margin: 0; font-size: clamp(32px, 4vw, 48px); letter-spacing: -.05em; line-height: 1.1; }
+      .planmerge-card h2 span {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--green-deep);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: .12em;
+      }
+      .planmerge-lead { max-width: 760px; margin: 20px 0 30px; color: #454c47; font-size: 17px; letter-spacing: -.025em; line-height: 1.7; }
+      .planmerge-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 30px;
+      }
+      .planmerge-shot { overflow: hidden; margin: 0; border: 1px solid var(--line); background: #fff; }
+      .planmerge-shot img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: contain;
+        object-position: top;
+        background: #fff;
+      }
+      .planmerge-shot figcaption {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border-top: 1px solid var(--line);
+      }
+      .planmerge-shot strong { font-size: 14px; letter-spacing: -.03em; }
+      .planmerge-shot span { color: var(--green-deep); font-size: 11px; font-weight: 900; }
+      .planmerge-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .planmerge-stat { padding-top: 14px; border-top: 2px solid var(--ink); }
+      .planmerge-stat b { color: var(--green-deep); font-size: 12px; letter-spacing: .1em; }
+      .planmerge-stat strong { display: block; margin-top: 12px; font-size: 19px; letter-spacing: -.035em; }
+      .planmerge-stat span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+      .planmerge-links { display: flex; flex-wrap: wrap; gap: 16px; }
+      .planmerge-links a { color: var(--green-deep); font-size: 13px; font-weight: 900; }
+
+      .image-lightbox {
+        width: min(94vw, 1500px);
+        max-width: none;
+        max-height: 92vh;
+        margin: auto;
+        padding: 0;
+        overflow: visible;
+        border: 0;
+        background: transparent;
+      }
+      .image-lightbox::backdrop { background: rgba(7, 12, 8, .9); backdrop-filter: blur(5px); }
+      .image-lightbox-inner {
+        position: relative;
+        display: grid;
+        place-items: center;
+        max-height: 92vh;
+      }
+      .image-lightbox img {
+        width: auto;
+        max-width: 94vw;
+        max-height: 84vh;
+        object-fit: contain;
+        background: #fff;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, .36);
+      }
+      .image-lightbox p {
+        margin: 12px 0 0;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .image-lightbox-close {
+        position: absolute;
+        right: 0;
+        bottom: calc(100% + 12px);
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, .48);
+        border-radius: 50%;
+        color: #fff;
+        background: rgba(0, 0, 0, .28);
+        font: inherit;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .site-footer {
+        padding: 24px 0 34px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .footer-links { display: flex; gap: 16px; color: var(--ink); font-weight: 800; }
+
+      @media (max-width: 820px) {
+        .wrap { width: min(calc(100% - 32px), var(--max)); }
+        .hero { min-height: auto; padding: 34px 0 52px; }
+        .hero-top { align-items: start; gap: 14px; }
+        .hero-title-lockup { margin: 78px 0 62px; }
+        .hero h1 { font-size: clamp(82px, 27vw, 126px); }
+        .hero-bottom { grid-template-columns: 1fr; gap: 26px; }
+        .section { padding: 60px 0; }
+        .section-head { display: block; margin-bottom: 22px; }
+        .section-action { display: inline-block; margin-top: 16px; }
+        .work-grid, .flow-evidence, .flow-points { grid-template-columns: 1fr; gap: 28px; }
+        .flow-map { grid-template-columns: 1fr; gap: 8px; margin-top: 28px; }
+        .flow-step { min-height: 0; padding: 14px; gap: 8px; }
+        .flow-arrow { min-height: 18px; transform: rotate(90deg); }
+        .thumb { aspect-ratio: 16 / 9; }
+        .insight-grid, .planmerge-gallery, .planmerge-grid { grid-template-columns: 1fr; }
+        .insight-item { min-height: 0; }
+        .planmerge-card { padding: 22px; }
+        .footer-inner { align-items: start; flex-direction: column; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .thumb img { transition: none; }
+      }
+
+      @media print {
+        @page { size: A4 landscape; margin: 8mm; }
+        html { scroll-behavior: auto; }
+        body {
+          font-size: 9.5px;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .wrap { width: 100%; max-width: none; }
+        .hero { min-height: 180mm; padding: 10mm 0 8mm; break-after: page; }
+        .hero-top { flex-direction: row; }
+        .hero h1 { max-width: none; font-size: 78pt; }
+        .hero-title-lockup { margin: 15mm 0 14mm; }
+        .hero-bottom { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 14mm; padding-top: 6mm; }
+        .hero-keywords { font-size: 14pt; }
+        .hero-project p { font-size: 8pt; }
+        .section { padding: 7mm 0; }
+        .section-head { display: flex; margin-bottom: 5mm; }
+        .section-head h2, .planmerge-card h2 { font-size: 23pt; }
+        .section-index, .eyebrow, .card-index { margin-bottom: 3mm; font-size: 8pt; }
+        .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4mm; }
+        .work-info { padding-top: 3mm; }
+        .work-info h3 { font-size: 12pt; }
+        .work-info p, .work-open { font-size: 7.5pt; }
+        .insight-lead { margin-bottom: 5mm; font-size: 17pt; }
+        .insight-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .insight-item { min-height: 42mm; padding: 6mm; }
+        .insight-item strong { margin-top: 4mm; font-size: 13pt; }
+        .insight-item span { margin-top: 2mm; font-size: 8pt; }
+        .flow-lead { margin-bottom: 4mm; font-size: 10pt; line-height: 1.55; }
+        .flow-points { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2mm; margin-bottom: 4mm; }
+        .flow-point { padding: 3mm; }
+        .flow-point strong { margin-top: 1.5mm; font-size: 10pt; }
+        .flow-point span { margin-top: 1mm; font-size: 7pt; line-height: 1.45; }
+        .flow-map { grid-template-columns: minmax(0, 1fr) 5mm minmax(0, 1fr) 5mm minmax(0, 1fr) 5mm minmax(0, 1fr) 5mm minmax(0, 1fr); gap: 1.5mm; margin: 4mm 0; }
+        .flow-step { min-height: 24mm; padding: 3mm; }
+        .flow-step strong { font-size: 10pt; }
+        .flow-evidence { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; }
+        .flow-card header { padding: 2mm 3mm; }
+        .flow-card img { height: 40mm; aspect-ratio: auto; }
+        .flow-card footer { padding: 2mm 3mm; }
+        .flow-loop { margin-top: 3mm; }
+        .planmerge-card { padding: 6mm; }
+        .planmerge-lead { margin: 3mm 0 4mm; font-size: 9pt; line-height: 1.55; }
+        .planmerge-gallery, .planmerge-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; }
+        .planmerge-gallery { margin-bottom: 4mm; }
+        .planmerge-shot img { height: 43mm; aspect-ratio: auto; }
+        .planmerge-shot figcaption { padding: 2mm 3mm; }
+        .planmerge-grid { margin-bottom: 4mm; }
+        .planmerge-stat { padding-top: 2mm; }
+        .planmerge-stat strong { margin-top: 2mm; font-size: 11pt; }
+        .planmerge-stat span { margin-top: 1mm; font-size: 7.5pt; }
+        .work-card, .flow-card, .flow-point, .insight-item, .planmerge-shot, .planmerge-stat { break-inside: avoid; }
+        #work, #flow, #insights, #planmerge { break-before: page; break-after: page; }
+        .flow-section, .insight-section { box-decoration-break: clone; }
+        .planmerge-section { padding-bottom: 7mm; }
+        .site-footer { display: none; }
+        .image-lightbox { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="top">
+      <div class="wrap">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-top">
+            <p class="hero-target">AI 영상 제작 · 기획 포트폴리오</p>
+          </div>
+          <div class="hero-title-lockup">
+            <h1 id="hero-title">조성익<span aria-hidden="true">.</span></h1>
+          </div>
+          <div class="hero-bottom">
+            <article class="hero-project">
+              <b class="hero-keyword-label">제작 경험</b>
+              <strong class="hero-keywords">AI 영상 기획 · 생성 · 편집</strong>
+              <p>곡의 감정선을 장면으로 구성하고 이미지 생성부터 영상 편집까지 진행해 AI 뮤직비디오 10편을 공개했습니다.</p>
+            </article>
+            <article class="hero-project">
+              <b class="hero-keyword-label">도구 설계</b>
+              <strong class="hero-keywords">MotionFlow · 영상 제작 워크플로우<br />PlanMerge · 기획안 통합 도구</strong>
+              <p>제작 과정의 반복 입력과 결과 비교를 줄이는 도구, 여러 기획안을 비교하고 하나로 정리하는 도구를 각각 만들었습니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="work" aria-labelledby="work-title">
+          <div class="section-head">
+            <div>
+              <p class="section-index">01 / 대표 작품</p>
+              <h2 id="work-title">대표 영상 작업</h2>
+            </div>
+            <a class="section-action" href="https://www.youtube.com/@Veo-MV" target="_blank" rel="noreferrer">전체 영상 10편 보기 ↗</a>
+          </div>
+
+          <div class="work-grid">
+            <article class="work-card">
+              <a href="https://www.youtube.com/watch?v=8zVa1lOls3c" target="_blank" rel="noreferrer">
+                <div class="thumb">
+                  <img src="/ai-video-portfolio/assets/thumb-enemy-jwRELhN5.jpg" alt="Imagine Dragons Enemy AI 커버 뮤직비디오 썸네일" />
+                  <div class="thumb-meta"><span>01 / AI 뮤직비디오</span><span>02:55</span></div>
+                </div>
+                <div class="work-info">
+                  <div><h3>Imagine Dragons — Enemy</h3><p>기획 · 이미지 생성 · 영상 편집</p></div>
+                  <span class="work-open">영상 보기 ↗</span>
+                </div>
+              </a>
+            </article>
+            <article class="work-card">
+              <a href="https://www.youtube.com/watch?v=HFvEmFsUG1A" target="_blank" rel="noreferrer">
+                <div class="thumb">
+                  <img src="/ai-video-portfolio/assets/thumb-lose-my-mind-Du3z7EV4.jpg" alt="Don Toliver Lose My Mind AI 커버 뮤직비디오 썸네일" />
+                  <div class="thumb-meta"><span>02 / AI 뮤직비디오</span><span>03:30</span></div>
+                </div>
+                <div class="work-info">
+                  <div><h3>Don Toliver — Lose My Mind</h3><p>기획 · 이미지 생성 · 영상 편집</p></div>
+                  <span class="work-open">영상 보기 ↗</span>
+                </div>
+              </a>
+            </article>
+            <article class="work-card">
+              <a href="https://www.youtube.com/watch?v=saB7ugLeKtg" target="_blank" rel="noreferrer">
+                <div class="thumb">
+                  <img src="/ai-video-portfolio/assets/thumb-cortis-EnXtrdKn.jpg" alt="CORTIS FaSHioN AI 커버 뮤직비디오 썸네일" />
+                  <div class="thumb-meta"><span>03 / AI 뮤직비디오</span><span>02:53</span></div>
+                </div>
+                <div class="work-info">
+                  <div><h3>CORTIS — FaSHioN</h3><p>기획 · 이미지 생성 · 영상 편집</p></div>
+                  <span class="work-open">영상 보기 ↗</span>
+                </div>
+              </a>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <section class="section insight-section" id="insights" aria-labelledby="insight-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="section-index">02 / MotionFlow</p>
+              <h2 id="insight-title">영상 제작 워크플로우를 만든 이유</h2>
+            </div>
+          </div>
+          <p class="insight-lead">MotionFlow는 장면 기획부터 이미지 생성, 영상 제작까지 이어주는 AI 영상 제작 워크플로우입니다. 프롬프트 작성과 생성 단계가 서로 끊겨 같은 장면 정보를 매번 다시 입력해야 하는 문제를 줄이기 위해 만들었습니다.</p>
+          <div class="insight-grid">
+            <article class="insight-item">
+              <b>01 / 기획 배경</b>
+              <strong>분산된 작업</strong>
+              <span>프롬프트를 매번 새로 쓰고, 이미지와 영상 도구 사이에서 같은 인물·장면·구도 정보를 반복해서 옮기는 일이 번거롭고 어려웠습니다.</span>
+            </article>
+            <article class="insight-item">
+              <b>02 / 만든 방식</b>
+              <strong>정보 연결</strong>
+              <span>장면 설정과 프롬프트를 기준 이미지에 연결하고, 선택한 이미지를 영상 제작 입력으로 넘겨 한 화면에서 흐름을 이어가도록 구성했습니다.</span>
+            </article>
+            <article class="insight-item">
+              <b>03 / 얻은 인사이트</b>
+              <strong>맥락 유지</strong>
+              <span>프롬프트를 따로 잘 쓰는 것보다 장면 기준과 선택 결과가 다음 생성에 그대로 이어질 때 반복 작업과 수정 비용이 줄었습니다.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section flow-section" id="flow" aria-labelledby="flow-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="section-index">03 / MotionFlow</p>
+              <h2 id="flow-title">제작 워크플로우</h2>
+            </div>
+            <a class="section-action" href="https://github.com/whtjddlr/ai-mv" target="_blank" rel="noreferrer">코드 보기 ↗</a>
+          </div>
+
+          <p class="flow-lead">MotionFlow는 장면의 목적과 앞뒤 관계를 정리한 뒤 이미지와 영상 제작에 필요한 입력을 연결합니다. 장면 설정이 바뀌면 다시 확인해야 할 구도와 후속 장면을 보여주고, 선택한 결과는 다음 제작 단계의 기준으로 이어집니다.</p>
+
+          <div class="flow-points" aria-label="제작 흐름의 핵심">
+            <div class="flow-point"><b>01 / 장면 분석</b><strong>앞뒤 관계</strong><span>장면의 역할과 인물·장소·소품의 연속성을 분석해 이어질 장면을 제안합니다.</span></div>
+            <div class="flow-point"><b>02 / 구도 제안</b><strong>4개 구도 후보</strong><span>같은 장면을 와이드·미디엄·클로즈업·대체 구도로 만들어 비교합니다.</span></div>
+            <div class="flow-point"><b>03 / 프롬프트</b><strong>모델별 지시문</strong><span>한 번 정한 장면 기준을 이미지와 영상 모델에 맞는 순서로 정리합니다.</span></div>
+            <div class="flow-point"><b>04 / 변경 영향</b><strong>후속 장면 확인</strong><span>의상·조명·화면 방향이 바뀌면 다시 확인해야 할 뒤 장면을 표시합니다.</span></div>
+          </div>
+
+          <div class="flow-map" aria-label="제작 워크플로우">
+            <div class="flow-step"><b>01</b><strong>기획</strong><span>작업 목표</span></div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-step is-key"><b>02</b><strong>장면 설계</strong><span>장면 기준</span></div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-step is-key"><b>03</b><strong>이미지 생성</strong><span>기준 이미지</span></div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-step is-key"><b>04</b><strong>영상화</strong><span>움직임 적용</span></div>
+            <div class="flow-arrow" aria-hidden="true">→</div>
+            <div class="flow-step"><b>05</b><strong>비교·선택</strong><span>다음 장면</span></div>
+          </div>
+
+          <div class="flow-evidence" aria-label="워크플로우 화면 기록">
+            <article class="flow-card">
+              <header><span>01 / 장면 분석</span><strong>스토리 흐름</strong></header>
+              <img src="/ai-video-portfolio/assets/02-story-flow-PcXEbqVS.png" alt="MotionFlow 앞뒤 장면 관계 분석 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="MotionFlow 앞뒤 장면 관계 분석 화면 확대" />
+              <footer><strong>앞뒤 장면 관계</strong><span>추천·승인</span></footer>
+            </article>
+            <article class="flow-card">
+              <header><span>02 / 구도 제안</span><strong>구도 후보 비교</strong></header>
+              <img src="/ai-video-portfolio/assets/04-image-generation-9JFZ3z0w.png" alt="MotionFlow 네 가지 구도 후보 비교 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="MotionFlow 네 가지 구도 후보 비교 화면 확대" />
+              <footer><strong>와이드·미디엄·클로즈업</strong><span>비교·선택</span></footer>
+            </article>
+            <article class="flow-card">
+              <header><span>03 / 변경 영향</span><strong>후속 장면 확인</strong></header>
+              <img src="/ai-video-portfolio/assets/06-change-review-B9pm112H.png" alt="MotionFlow 앞 장면 변경이 후속 장면에 미치는 영향 확인 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="MotionFlow 변경 영향 확인 화면 확대" />
+              <footer><strong>영향 범위</strong><span>선택 적용</span></footer>
+            </article>
+          </div>
+          <div class="flow-loop" aria-label="결과 반영"><span>선택</span><i></i><span>다음 장면</span><b>↻</b></div>
+        </div>
+      </section>
+
+      <section class="section planmerge-section" id="planmerge" aria-labelledby="planmerge-title">
+        <div class="wrap">
+          <div class="planmerge-card">
+            <p class="section-index">04 / PlanMerge</p>
+            <h2 id="planmerge-title"><span>PlanMerge</span>기획안 통합 도구</h2>
+            <p class="planmerge-lead">PlanMerge는 영상 제작 전에 여러 관점에서 만든 기획안을 비교하고 하나로 정리하는 별도의 기획 도구입니다. 어떤 제안이 선택되거나 제외됐는지 확인할 수 있으며, MotionFlow와 달리 제작 전 기획을 비교하고 결정하는 과정을 다룹니다.</p>
+            <div class="planmerge-gallery" aria-label="PlanMerge 서비스 화면">
+              <figure class="planmerge-shot">
+                <img src="/ai-video-portfolio/assets/planmerge-setup-D2S5-Axf.jpg" alt="PlanMerge 프로젝트 설정 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="PlanMerge 프로젝트 설정 화면 확대" />
+                <figcaption><strong>프로젝트 설정</strong><span>목표·기준 고정</span></figcaption>
+              </figure>
+              <figure class="planmerge-shot">
+                <img src="/ai-video-portfolio/assets/planmerge-merge-BKYpzpAw.jpg" alt="PlanMerge 병합 결과와 출처 추적 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="PlanMerge 병합 결과와 출처 추적 화면 확대" />
+                <figcaption><strong>병합 결과</strong><span>선택·대안·출처</span></figcaption>
+              </figure>
+              <figure class="planmerge-shot">
+                <img src="/ai-video-portfolio/assets/planmerge-review-CbdZ7D7H.jpg" alt="PlanMerge 충돌 검토 대기열 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="PlanMerge 충돌 검토 대기열 화면 확대" />
+                <figcaption><strong>충돌 검토</strong><span>검토 대기열</span></figcaption>
+              </figure>
+            </div>
+            <div class="planmerge-grid">
+              <div class="planmerge-stat"><b>입력</b><strong>13개 역할별 초안</strong><span>12개 섹션으로 병합</span></div>
+              <div class="planmerge-stat"><b>분석</b><strong>선택·대안·충돌·출처</strong><span>섹션별 판단 근거 추적</span></div>
+              <div class="planmerge-stat"><b>결정</b><strong>영향받은 부분만 수정</strong><span>최종 결정은 사람이 수행</span></div>
+            </div>
+            <div class="planmerge-links">
+              <a href="https://planmerge-ai.vercel.app/" target="_blank" rel="noreferrer">서비스 보기 ↗</a>
+              <a href="https://github.com/whtjddlr/planmerge-ai" target="_blank" rel="noreferrer">GitHub 보기 ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>조성익 · AI 영상 제작/기획 포트폴리오</span>
+        <div class="footer-links"><a href="https://www.youtube.com/@Veo-MV" target="_blank" rel="noreferrer">YouTube</a><a href="https://github.com/whtjddlr/ai-mv" target="_blank" rel="noreferrer">GitHub</a></div>
+      </div>
+    </footer>
+
+    <dialog class="image-lightbox" aria-label="이미지 확대 보기">
+      <div class="image-lightbox-inner">
+        <button class="image-lightbox-close" type="button" aria-label="확대 이미지 닫기">×</button>
+        <img src="" alt="" />
+        <p></p>
+      </div>
+    </dialog>
+
+    <script>
+      const lightbox = document.querySelector('.image-lightbox');
+      const lightboxImage = lightbox.querySelector('img');
+      const lightboxCaption = lightbox.querySelector('p');
+      const closeLightbox = () => lightbox.close();
+
+      function openLightbox(image) {
+        lightboxImage.src = image.currentSrc || image.src;
+        lightboxImage.alt = image.alt;
+        lightboxCaption.textContent = image.alt;
+        lightbox.showModal();
+      }
+
+      document.querySelectorAll('[data-zoomable]').forEach((image) => {
+        image.addEventListener('click', () => openLightbox(image));
+        image.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLightbox(image);
+          }
+        });
+      });
+
+      lightbox.querySelector('.image-lightbox-close').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      lightbox.addEventListener('close', () => {
+        lightboxImage.src = '';
+        lightboxCaption.textContent = '';
+      });
+    </script>
+  </body>
+</html>
