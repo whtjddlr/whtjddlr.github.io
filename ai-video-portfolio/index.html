@@ -202,35 +202,31 @@
         grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr);
         align-items: stretch;
         gap: 10px;
-        margin: 38px 0 26px;
+        margin: 32px 0 26px;
       }
-      .flow-points {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 10px;
-        margin-bottom: 30px;
-      }
-      .flow-point {
-        position: relative;
-        padding: 18px 18px 18px 22px;
-        border-left: 3px solid var(--green);
-        background: #fff;
-      }
-      .flow-point b { color: var(--green-deep); font-size: 11px; letter-spacing: .1em; }
-      .flow-point strong { display: block; margin-top: 9px; font-size: 17px; letter-spacing: -.03em; }
-      .flow-point span { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; line-height: 1.65; }
       .flow-step {
-        display: grid;
-        align-content: space-between;
-        min-height: 112px;
-        padding: 16px;
+        display: flex;
+        min-height: 184px;
+        padding: 18px;
+        flex-direction: column;
         border: 1px solid var(--line);
+        border-top: 4px solid var(--green);
         background: #fff;
       }
-      .flow-step.is-key { border-color: var(--green); box-shadow: inset 0 -3px 0 var(--green); }
       .flow-step b { color: var(--green-deep); font-size: 12px; letter-spacing: .1em; }
-      .flow-step strong { font-size: 18px; letter-spacing: -.035em; }
-      .flow-step span { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+      .flow-step strong { margin-top: 16px; font-size: 18px; letter-spacing: -.035em; word-break: keep-all; }
+      .flow-step p { margin: 8px 0 18px; color: var(--muted); font-size: 12px; line-height: 1.6; word-break: keep-all; }
+      .flow-step span {
+        display: block;
+        margin-top: auto;
+        padding-top: 11px;
+        border-top: 1px solid var(--line);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: -.01em;
+        word-break: keep-all;
+      }
       .flow-arrow {
         display: grid;
         place-items: center;
@@ -270,12 +266,12 @@
         gap: 12px;
         margin-top: 20px;
         color: var(--muted);
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 900;
-        letter-spacing: .14em;
+        letter-spacing: -.01em;
       }
       .flow-loop i { display: block; width: 34px; height: 1px; background: var(--green); }
-      .flow-loop b { color: var(--green-deep); font-size: 18px; font-weight: 400; }
+      .flow-loop b { color: var(--green-deep); font-size: 13px; }
 
       .insight-section { background: var(--dark); color: #fff; }
       .insight-section .section-index { color: #79e9a1; }
@@ -422,9 +418,11 @@
         .section { padding: 60px 0; }
         .section-head { display: block; margin-bottom: 22px; }
         .section-action { display: inline-block; margin-top: 16px; }
-        .work-grid, .flow-evidence, .flow-points { grid-template-columns: 1fr; gap: 28px; }
+        .work-grid, .flow-evidence { grid-template-columns: 1fr; gap: 28px; }
         .flow-map { grid-template-columns: 1fr; gap: 8px; margin-top: 28px; }
-        .flow-step { min-height: 0; padding: 14px; gap: 8px; }
+        .flow-step { min-height: 0; padding: 16px; }
+        .flow-step strong { margin-top: 10px; }
+        .flow-step p { margin-bottom: 14px; }
         .flow-arrow { min-height: 18px; transform: rotate(90deg); }
         .thumb { aspect-ratio: 16 / 9; }
         .insight-grid, .planmerge-gallery, .planmerge-grid { grid-template-columns: 1fr; }
@@ -468,13 +466,11 @@
         .insight-item strong { margin-top: 4mm; font-size: 13pt; }
         .insight-item span { margin-top: 2mm; font-size: 8pt; }
         .flow-lead { margin-bottom: 4mm; font-size: 10pt; line-height: 1.55; }
-        .flow-points { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2mm; margin-bottom: 4mm; }
-        .flow-point { padding: 3mm; }
-        .flow-point strong { margin-top: 1.5mm; font-size: 10pt; }
-        .flow-point span { margin-top: 1mm; font-size: 7pt; line-height: 1.45; }
         .flow-map { grid-template-columns: minmax(0, 1fr) 5mm minmax(0, 1fr) 5mm minmax(0, 1fr) 5mm minmax(0, 1fr) 5mm minmax(0, 1fr); gap: 1.5mm; margin: 4mm 0; }
-        .flow-step { min-height: 24mm; padding: 3mm; }
+        .flow-step { min-height: 35mm; padding: 3mm; }
         .flow-step strong { font-size: 10pt; }
+        .flow-step p { margin: 1.5mm 0 2mm; font-size: 7pt; line-height: 1.4; }
+        .flow-step span { padding-top: 1.5mm; font-size: 7pt; }
         .flow-evidence { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; }
         .flow-card header { padding: 2mm 3mm; }
         .flow-card img { height: 40mm; aspect-ratio: auto; }
@@ -490,7 +486,7 @@
         .planmerge-stat { padding-top: 2mm; }
         .planmerge-stat strong { margin-top: 2mm; font-size: 11pt; }
         .planmerge-stat span { margin-top: 1mm; font-size: 7.5pt; }
-        .work-card, .flow-card, .flow-point, .insight-item, .planmerge-shot, .planmerge-stat { break-inside: avoid; }
+        .work-card, .flow-card, .flow-step, .insight-item, .planmerge-shot, .planmerge-stat { break-inside: avoid; }
         #work, #flow, #insights, #planmerge { break-before: page; break-after: page; }
         .flow-section, .insight-section { box-decoration-break: clone; }
         .planmerge-section { padding-bottom: 7mm; }
@@ -607,50 +603,42 @@
           <div class="section-head">
             <div>
               <p class="section-index">03 / MotionFlow</p>
-              <h2 id="flow-title">제작 워크플로우</h2>
+              <h2 id="flow-title">한 장면이 영상이 되는 과정</h2>
             </div>
-            <a class="section-action" href="https://github.com/whtjddlr/ai-mv" target="_blank" rel="noreferrer">코드 보기 ↗</a>
           </div>
 
-          <p class="flow-lead">MotionFlow는 장면의 목적과 앞뒤 관계를 정리한 뒤 이미지와 영상 제작에 필요한 입력을 연결합니다. 장면 설정이 바뀌면 다시 확인해야 할 구도와 후속 장면을 보여주고, 선택한 결과는 다음 제작 단계의 기준으로 이어집니다.</p>
-
-          <div class="flow-points" aria-label="제작 흐름의 핵심">
-            <div class="flow-point"><b>01 / 장면 분석</b><strong>앞뒤 관계</strong><span>장면의 역할과 인물·장소·소품의 연속성을 분석해 이어질 장면을 제안합니다.</span></div>
-            <div class="flow-point"><b>02 / 구도 제안</b><strong>4개 구도 후보</strong><span>같은 장면을 와이드·미디엄·클로즈업·대체 구도로 만들어 비교합니다.</span></div>
-            <div class="flow-point"><b>03 / 프롬프트</b><strong>모델별 지시문</strong><span>한 번 정한 장면 기준을 이미지와 영상 모델에 맞는 순서로 정리합니다.</span></div>
-            <div class="flow-point"><b>04 / 변경 영향</b><strong>후속 장면 확인</strong><span>의상·조명·화면 방향이 바뀌면 다시 확인해야 할 뒤 장면을 표시합니다.</span></div>
-          </div>
+          <p class="flow-lead">한 번 정한 장면 정보를 이미지와 영상 제작에 이어 쓰고, 앞 장면을 수정하면 다시 확인해야 할 뒤 장면까지 보여주는 흐름입니다.</p>
 
           <div class="flow-map" aria-label="제작 워크플로우">
-            <div class="flow-step"><b>01</b><strong>기획</strong><span>작업 목표</span></div>
+            <div class="flow-step"><b>01 / 장면 연결</b><strong>앞뒤 장면 분석</strong><p>인물·장소·소품이 이어지는 장면을 확인합니다.</p><span>장면 목록 → 연결 관계</span></div>
             <div class="flow-arrow" aria-hidden="true">→</div>
-            <div class="flow-step is-key"><b>02</b><strong>장면 설계</strong><span>장면 기준</span></div>
+            <div class="flow-step"><b>02 / 기준 작성</b><strong>장면 기준 작성</strong><p>인물, 구도, 조명, 동작을 한 번 입력해 장면 기준으로 정리합니다.</p><span>연출 의도 → 장면 기준</span></div>
             <div class="flow-arrow" aria-hidden="true">→</div>
-            <div class="flow-step is-key"><b>03</b><strong>이미지 생성</strong><span>기준 이미지</span></div>
+            <div class="flow-step"><b>03 / 이미지</b><strong>4개 구도 비교</strong><p>같은 기준으로 와이드·미디엄·클로즈업·대체 구도를 만듭니다.</p><span>장면 기준 → 선택 이미지</span></div>
             <div class="flow-arrow" aria-hidden="true">→</div>
-            <div class="flow-step is-key"><b>04</b><strong>영상화</strong><span>움직임 적용</span></div>
+            <div class="flow-step"><b>04 / 영상</b><strong>움직임 적용</strong><p>선택 이미지와 모델별 움직임 지시문으로 영상을 제작합니다.</p><span>선택 이미지 → 영상 후보</span></div>
             <div class="flow-arrow" aria-hidden="true">→</div>
-            <div class="flow-step"><b>05</b><strong>비교·선택</strong><span>다음 장면</span></div>
+            <div class="flow-step"><b>05 / 수정 확인</b><strong>후속 장면 영향</strong><p>앞 장면의 변경이 영향을 주는 뒤 장면만 다시 확인합니다.</p><span>변경 내용 → 확인할 장면</span></div>
           </div>
 
           <div class="flow-evidence" aria-label="워크플로우 화면 기록">
             <article class="flow-card">
-              <header><span>01 / 장면 분석</span><strong>스토리 흐름</strong></header>
+              <header><span>01 / 장면 연결</span><strong>앞뒤 장면 분석</strong></header>
               <img src="/ai-video-portfolio/assets/02-story-flow-PcXEbqVS.png" alt="MotionFlow 앞뒤 장면 관계 분석 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="MotionFlow 앞뒤 장면 관계 분석 화면 확대" />
-              <footer><strong>앞뒤 장면 관계</strong><span>추천·승인</span></footer>
+              <footer><strong>이어지는 장면 확인</strong><span>연결 관계</span></footer>
             </article>
             <article class="flow-card">
-              <header><span>02 / 구도 제안</span><strong>구도 후보 비교</strong></header>
+              <header><span>03 / 이미지</span><strong>4개 구도 비교</strong></header>
               <img src="/ai-video-portfolio/assets/04-image-generation-9JFZ3z0w.png" alt="MotionFlow 네 가지 구도 후보 비교 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="MotionFlow 네 가지 구도 후보 비교 화면 확대" />
-              <footer><strong>와이드·미디엄·클로즈업</strong><span>비교·선택</span></footer>
+              <footer><strong>같은 기준으로 비교</strong><span>선택 이미지</span></footer>
             </article>
             <article class="flow-card">
-              <header><span>03 / 변경 영향</span><strong>후속 장면 확인</strong></header>
+              <header><span>05 / 수정 확인</span><strong>후속 장면 영향</strong></header>
               <img src="/ai-video-portfolio/assets/06-change-review-B9pm112H.png" alt="MotionFlow 앞 장면 변경이 후속 장면에 미치는 영향 확인 화면" loading="lazy" data-zoomable tabindex="0" role="button" aria-label="MotionFlow 변경 영향 확인 화면 확대" />
-              <footer><strong>영향 범위</strong><span>선택 적용</span></footer>
+              <footer><strong>다시 볼 장면만 표시</strong><span>변경 영향</span></footer>
             </article>
           </div>
-          <div class="flow-loop" aria-label="결과 반영"><span>선택</span><i></i><span>다음 장면</span><b>↻</b></div>
+          <div class="flow-loop" aria-label="수정 흐름"><b>수정이 생기면</b><i></i><span>영향받은 장면만 02단계부터 다시 진행합니다.</span></div>
         </div>
       </section>
 
@@ -681,7 +669,6 @@
             </div>
             <div class="planmerge-links">
               <a href="https://planmerge-ai.vercel.app/" target="_blank" rel="noreferrer">서비스 보기 ↗</a>
-              <a href="https://github.com/whtjddlr/planmerge-ai" target="_blank" rel="noreferrer">GitHub 보기 ↗</a>
             </div>
           </div>
         </div>
@@ -691,7 +678,7 @@
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <span>조성익 · AI 영상 제작/기획 포트폴리오</span>
-        <div class="footer-links"><a href="https://www.youtube.com/@Veo-MV" target="_blank" rel="noreferrer">YouTube</a><a href="https://github.com/whtjddlr/ai-mv" target="_blank" rel="noreferrer">GitHub</a></div>
+        <div class="footer-links"><a href="https://www.youtube.com/@Veo-MV" target="_blank" rel="noreferrer">YouTube</a></div>
       </div>
     </footer>
 
