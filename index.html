@@ -76,7 +76,7 @@ html{scroll-snap-type:y mandatory}
 <div class="scene-copy"><dl><div><dt>문제</dt><dd>면접이나 공연처럼 도착 시각이 정해진 날에는 언제 출발해야 하는지가 중요합니다.</dd></div><div><dt>접근</dt><dd>경로 API와 보행 속도로 출발 시각을 역산하고, 신호 정보는 이동 중 행동 안내로 바꿨습니다.</dd></div><div><dt>결과</dt><dd>출발 추천과 이동 안내를 PWA로 구현·배포했습니다. 핵심 계산 로직을 단위 테스트 59건과 E2E 테스트로 점검했습니다.</dd></div></dl><p class="role">개인 프로젝트 · 기획, 설계, 개발, 테스트<span>2026.04</span></p><div class="project-links"><a href="https://bbaru.vercel.app" target="_blank" rel="noopener noreferrer">서비스 <span aria-hidden="true">↗</span></a><a href="https://github.com/whtjddlr/BBaru" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div><details><summary>한계와 다음 과제</summary><p>실시간 신호 정보는 제공 지역과 시간대에 따라 제한됩니다. 실제 이동 기록으로 도착 시각 오차를 확인하고 보정하는 것이 남은 과제입니다.</p></details></div>
 </div></section><section class="chapter" id="aigo" style="--accent:#356b6a;--tint:#eff5f3" aria-labelledby="title-aigo" data-name="AIGO" data-number="05"><div class="scene-layout">
 <header class="chapter-heading"><p class="chapter-meta"><span>05 / 08</span><span>병원 · 음성 AI</span></p><h2 id="title-aigo" class="">AIGO</h2><p class="chapter-line">환자가 찾아가는 대신, 먼저 다가가다</p></header>
-<div class="scene-media"><div class="screen-gallery phones" tabindex="0" role="region" aria-roledescription="carousel" aria-label="AIGO 스크린샷"><div class="screen-track"><figure class="screen-slide" data-caption="진료실 안내"><a href="shots/aigo-ui-guide.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 진료실 안내 크게 보기"><img src="shots/aigo-ui-guide.jpg" width="340" height="604" alt="AIGO · 진료실 안내" loading="lazy"></a></figure><figure class="screen-slide" data-caption="접수 확인"><a href="shots/aigo-ui-confirm.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 접수 확인 크게 보기"><img src="shots/aigo-ui-confirm.jpg" width="340" height="604" alt="AIGO · 접수 확인" loading="lazy"></a></figure><figure class="screen-slide" data-caption="접수 시작"><a href="shots/aigo-ui-start.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 접수 시작 크게 보기"><img src="shots/aigo-ui-start.jpg" width="340" height="604" alt="AIGO · 접수 시작" loading="lazy"></a></figure></div></div><div class="screen-footer"><div class="screen-caption" aria-live="polite" aria-atomic="true"><span class="image-counter">01 / 03</span><p>진료실 안내</p></div><div class="screen-actions" ><button type="button" class="screen-prev" aria-label="AIGO 이전 화면">←</button><button type="button" class="screen-next" aria-label="AIGO 다음 화면">→</button></div></div><div class="screen-dots" role="group" aria-label="AIGO 화면 선택" ><button type="button" data-slide="0" aria-label="AIGO 1번 화면" aria-pressed="true"></button><button type="button" data-slide="1" aria-label="AIGO 2번 화면" aria-pressed="false"></button><button type="button" data-slide="2" aria-label="AIGO 3번 화면" aria-pressed="false"></button></div><p class="gallery-instruction">화면을 넘겨 보거나 눌러 프로젝트 자세히 보기</p></div>
+<div class="scene-media"><div class="screen-gallery phones" tabindex="0" role="region" aria-roledescription="carousel" aria-label="AIGO 프론트 UI 예시"><div class="screen-track"><figure class="screen-slide" data-caption="프론트 UI 예시 · 음성 문진"><a href="shots/aigo-current-symptom.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 음성 문진 프론트 UI 예시 크게 보기"><img src="shots/aigo-current-symptom.jpg" width="393" height="852" alt="AIGO 현재 프론트 UI 예시 · 음성 문진" loading="lazy"></a></figure><figure class="screen-slide" data-caption="프론트 UI 예시 · 진료과 확인"><a href="shots/aigo-current-department.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 진료과 확인 프론트 UI 예시 크게 보기"><img src="shots/aigo-current-department.jpg" width="393" height="852" alt="AIGO 현재 프론트 UI 예시 · 진료과 확인 (내과 예시)" loading="lazy"></a></figure><figure class="screen-slide" data-caption="프론트 UI 예시 · 접수 완료"><a href="shots/aigo-current-complete.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 접수 완료 프론트 UI 예시 크게 보기"><img src="shots/aigo-current-complete.jpg" width="393" height="852" alt="AIGO 현재 프론트 UI 예시 · 접수 완료 (내과·대기번호 7 예시)" loading="lazy"></a></figure><figure class="screen-slide" data-caption="프론트 UI 예시 · 진료과 안내"><a href="shots/aigo-current-guide.jpg" target="_blank" rel="noopener noreferrer" aria-label="AIGO 진료과 안내 프론트 UI 예시 크게 보기"><img src="shots/aigo-current-guide.jpg" width="393" height="852" alt="AIGO 현재 프론트 UI 예시 · 진료과 안내 (내과 예시)" loading="lazy"></a></figure></div></div><div class="screen-footer"><div class="screen-caption" aria-live="polite" aria-atomic="true"><span class="image-counter">01 / 04</span><p>프론트 UI 예시 · 음성 문진</p></div><div class="screen-actions" ><button type="button" class="screen-prev" aria-label="AIGO 이전 화면">←</button><button type="button" class="screen-next" aria-label="AIGO 다음 화면">→</button></div></div><div class="screen-dots" role="group" aria-label="AIGO 화면 선택" ><button type="button" data-slide="0" aria-label="AIGO 1번 화면" aria-pressed="true"></button><button type="button" data-slide="1" aria-label="AIGO 2번 화면" aria-pressed="false"></button><button type="button" data-slide="2" aria-label="AIGO 3번 화면" aria-pressed="false"></button><button type="button" data-slide="3" aria-label="AIGO 4번 화면" aria-pressed="false"></button></div><p class="gallery-instruction">화면을 넘겨 보거나 눌러 프로젝트 자세히 보기</p></div>
 <div class="scene-copy"><dl><div><dt>문제</dt><dd>고령 환자는 키오스크 접수와 진료과 선택, 병원 안의 반복 이동에 어려움을 겪습니다.</dd></div><div><dt>접근</dt><dd>이동형 키오스크에 음성 문진과 진료실 안내를 연결했습니다. 확신이 낮으면 되묻거나 직원에게 연결하도록 설계했습니다.</dd></div><div><dt>결과</dt><dd>실서버 문진 시나리오 20건 중 16건에서 기대 진료과와 일치했습니다.</dd></div></dl><p class="role">5인 팀 · 팀장, 문진 대화 엔진, 진료과 매핑, 평가 체계<span>2026.07–08</span></p><div class="project-links"></div><details><summary>한계와 다음 과제</summary><p>문진 시나리오 기반 테스트 결과이며, 실제 의료 현장의 임상 성능을 의미하지 않습니다.</p></details></div>
 </div></section><section class="chapter" id="heogaon" style="--accent:#667040;--tint:#f2f4eb" aria-labelledby="title-heogaon" data-name="허가온" data-number="06"><div class="scene-layout">
 <header class="chapter-heading"><p class="chapter-meta"><span>06 / 08</span><span>행정 · 지식 그래프</span></p><h2 id="title-heogaon" class="">허가온</h2><p class="chapter-line">막막한 창업 준비를 다음 할 일로</p></header>
@@ -154,7 +154,7 @@ html{scroll-snap-type:y mandatory}
   const root=document.documentElement;
   const content=zoom.querySelector('.zoom-content');
   const list=zoom.querySelector('.zoom-list');
-  let items=[],active=0,scrollBefore=0,closing=false;
+  let items=[],active=0,scrollBefore=0,closing=false,session=0;
   function showImage(index,direction=1){
    if(closing)return;
    active=(index+items.length)%items.length;
@@ -168,22 +168,24 @@ html{scroll-snap-type:y mandatory}
    zoom.querySelector('.zoom-caption p').textContent=items[active].dataset.caption;
    [...list.children].forEach((button,i)=>button.setAttribute('aria-pressed',String(i===active)));
   }
-  function finishClose(){
-   if(!closing)return;
+  function finishClose(expectedSession){
+   if(!closing||expectedSession!==session)return;
    closing=false;finishClosing.current=null;
    stopMotion(zoom.querySelector('.zoom-layout'));
    if(zoom.open)zoom.close();
   }
   function requestClose(){
    if(!zoom.open||closing)return;
-   closing=true;finishClosing.current=finishClose;
-   const animation=motion(zoom.querySelector('.zoom-layout'),[{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(10px)'}],{duration:180});
-   if(animation){animation.addEventListener('finish',finishClose,{once:true});animation.addEventListener('cancel',finishClose,{once:true});}
-   else finishClose();
+   closing=true;
+   const complete=()=>finishClose(sessionAtClose);
+   const sessionAtClose=session;finishClosing.current=complete;
+   const animation=motion(zoom.querySelector('.zoom-layout'),[{opacity:1},{opacity:0}],{duration:180});
+   if(animation){animation.addEventListener('finish',complete,{once:true});animation.addEventListener('cancel',complete,{once:true});}
+   else complete();
   }
   document.querySelectorAll('.screen-slide>a').forEach(link=>link.addEventListener('click',event=>{
    if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
-   event.preventDefault();if(zoom.open)return;opener=link;scrollBefore=window.scrollY;
+   event.preventDefault();if(zoom.open)return;session++;opener=link;scrollBefore=window.scrollY;
    const chapter=link.closest('.chapter');
    items=[...chapter.querySelectorAll('.screen-slide')];
    zoom.querySelector('#zoom-title').textContent=chapter.dataset.name;
@@ -201,7 +203,7 @@ html{scroll-snap-type:y mandatory}
    zoom.querySelector('.zoom-next').hidden=items.length<2;
    showImage(items.indexOf(link.closest('.screen-slide')));
    zoom.showModal();root.classList.add('viewer-open');zoom.scrollTop=0;
-   motion(zoom.querySelector('.zoom-layout'),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:460});
+   motion(zoom.querySelector('.zoom-layout'),[{opacity:0},{opacity:1}],{duration:460});
   }));
   zoom.querySelector('.zoom-prev').addEventListener('click',()=>showImage(active-1,-1));
   zoom.querySelector('.zoom-next').addEventListener('click',()=>showImage(active+1));
@@ -212,6 +214,8 @@ html{scroll-snap-type:y mandatory}
    else if(event.key==='Home'||event.key==='End'){event.preventDefault();showImage(event.key==='Home'?0:items.length-1);}
   });
   zoom.addEventListener('close',()=>{
+   // Native close events are queued; a newer open must keep its scroll lock.
+   if(zoom.open)return;
    closing=false;finishClosing.current=null;
    stopMotion(zoom.querySelector('.zoom-layout'));content.querySelector('img')?.getAnimations?.().forEach(animation=>animation.cancel());
    root.classList.remove('viewer-open');
